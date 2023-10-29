@@ -37,5 +37,3 @@ async def tb_mmu(dut):
     assert dut.addr.value == 0
     assert int(dut.data.value) == int("1010101010101010101010101010101010101010",2)
 
-
-    assert 1==1

@@ -12,15 +12,15 @@ entity seu_detector is
   );
   port
   (
-    clk_src          : in std_logic;
-    rst_n            : in std_logic;
-    total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(40 * 10)))) downto 0) -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_M10K)))) downto 0)
+    clk_src            : in std_logic;
+    rst_n              : in std_logic;
+    total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(40 * 10)))) downto 0) -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
   );
 end seu_detector;
 
 architecture rtl of seu_detector is
   -- CONSTANTS --
-  constant N_M10K    : integer := 10;
+  constant N_MEMS    : integer := 10;
   constant MEM_WIDTH : integer := 40;
   constant MEM_ADDRS : integer := 256;
 
@@ -35,11 +35,11 @@ architecture rtl of seu_detector is
   signal mem_clk    : std_logic;
   signal data       : std_logic_vector(40 - 1 downto 0);
   signal addr       : std_logic_vector(integer(ceil(log2(real(MEM_ADDRS)))) - 1 downto 0);
-  signal q_mem      : bus_array(N_M10K - 1 downto 0)((MEM_WIDTH - 1) downto 0);
+  signal q_mem      : bus_array(N_MEMS - 1 downto 0)((MEM_WIDTH - 1) downto 0);
   signal mmu_finish : std_logic;
 
   -- Count Errors
-  signal total_bitflips       : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_M10K)))) downto 0); -- Number of errros in binary	
+  signal total_bitflips       : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_MEMS)))) downto 0); -- Number of errros in binary	
   signal addr0_count_bitflips : std_logic; -- Used to cope with the delay introduced by the memory from write to q
 
   -- signal clk_mlab : std_logic;
@@ -57,7 +57,7 @@ architecture rtl of seu_detector is
   -- signal q_m10k_1, q_m10k_2		:  STD_LOGIC_VECTOR (39 DOWNTO 0);
   -- --constant count_ones_witdh: integer := (N_MLAB*q_mlab_1'length);
   -- --signal cnt_input :  STD_LOGIC_VECTOR (count_ones_witdh-1 DOWNTO 0);	
-  -- --signal count_bitflips_din : std_logic_vector((N_M10K * q_m10k_1'length - 1) downto 0);
+  -- --signal count_bitflips_din : std_logic_vector((N_MEMS * q_m10k_1'length - 1) downto 0);
   -- PRESERVE LINES --
   -- Needed if Quartus want to simplify my lines :(	
   --attribute preserve : boolean ;
@@ -141,7 +141,7 @@ begin
     );
 
   --Generic d_ff init based on N. GENERATE all the D Flip Flopps
-  GEN_M10K : for i in (N_M10K - 1) downto 0 generate
+  GEN_M10K : for i in (N_MEMS - 1) downto 0 generate
     ram_m10k_inst : ram_m10k port
     map (
     address => addr,
@@ -158,18 +158,18 @@ begin
       if rst_n = '1' then
         addr0_count_bitflips <= addr(0);
       else
-		addr0_count_bitflips <= '0'; -- Not sure if this reset is needed
+        addr0_count_bitflips <= '0'; -- Not sure if this reset is needed
       end if;
     else
-        addr0_count_bitflips <= addr0_count_bitflips;
+      addr0_count_bitflips <= addr0_count_bitflips;
     end if;
   end process;
 
-  --CNT_ONES : entity work.count_ones GENERIC MAP (din_width=>(N_M10K*q_m10k_1'length)) PORT MAP (din => (q_mlab_1 & q_mlab_2 & q_m10k_1), dout => total_bitflips);
+  --CNT_ONES : entity work.count_ones GENERIC MAP (din_width=>(N_MEMS*q_m10k_1'length)) PORT MAP (din => (q_mlab_1 & q_mlab_2 & q_m10k_1), dout => total_bitflips);
   CNT_ERRORS : entity work.count_bitflips_pattern generic
     map (
-    DIN_WIDTH => 40,
-    N_ARRAYS  => N_M10K)
+    MEM_WIDTH => 40,
+    N_MEMS    => N_MEMS)
     port
     map (
     din   => q_mem,
