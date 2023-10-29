@@ -1,0 +1,16 @@
+# File names are either absolute or relative to the parent folder of the
+# vhdl_ls.toml file and supports glob-style patterns.
+
+[libraries]
+
+# Defines library lib2
+#lib2.files = [
+#  'pkg2.vhd',
+#  'src/**/*.vhd',
+#]
+
+# Defines library lib1
+#lib1.files = [
+#  'pkg1.vhd',
+#  'tb_ent.vhd',
+#]

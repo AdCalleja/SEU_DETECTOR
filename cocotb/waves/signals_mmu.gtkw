@@ -1,0 +1,29 @@
+[*]
+[*] GTKWave Analyzer v3.3.117 (w)1999-2023 BSI
+[*] Sun Oct 29 10:58:08 2023
+[*]
+[dumpfile] "/home/ubuntu/code/seu_detector/cocotb/waves/wv_mmu.ghw"
+[dumpfile_mtime] "Sun Oct 29 10:57:29 2023"
+[dumpfile_size] 21996
+[savefile] "/home/ubuntu/code/seu_detector/cocotb/waves/signals_mmu.gtkw"
+[timestart] 1328600000
+[size] 1920 1000
+[pos] -1 -1
+*-26.000000 1608400000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.mmu.
+[sst_width] 194
+[signals_width] 390
+[sst_expanded] 1
+[sst_vpaned_height] 297
+@28
+top.mmu.clk
+top.mmu.rst_n
+top.mmu.mmu_finish
+#{top.mmu.data[39:0]} top.mmu.data[39] top.mmu.data[38] top.mmu.data[37] top.mmu.data[36] top.mmu.data[35] top.mmu.data[34] top.mmu.data[33] top.mmu.data[32] top.mmu.data[31] top.mmu.data[30] top.mmu.data[29] top.mmu.data[28] top.mmu.data[27] top.mmu.data[26] top.mmu.data[25] top.mmu.data[24] top.mmu.data[23] top.mmu.data[22] top.mmu.data[21] top.mmu.data[20] top.mmu.data[19] top.mmu.data[18] top.mmu.data[17] top.mmu.data[16] top.mmu.data[15] top.mmu.data[14] top.mmu.data[13] top.mmu.data[12] top.mmu.data[11] top.mmu.data[10] top.mmu.data[9] top.mmu.data[8] top.mmu.data[7] top.mmu.data[6] top.mmu.data[5] top.mmu.data[4] top.mmu.data[3] top.mmu.data[2] top.mmu.data[1] top.mmu.data[0]
+@25
+#{top.mmu.addr[7:0]} top.mmu.addr[7] top.mmu.addr[6] top.mmu.addr[5] top.mmu.addr[4] top.mmu.addr[3] top.mmu.addr[2] top.mmu.addr[1] top.mmu.addr[0]
+@28
+top.mmu.mem_clk
+[pattern_trace] 1
+[pattern_trace] 0
