@@ -1,0 +1,36 @@
+[*]
+[*] GTKWave Analyzer v3.3.117 (w)1999-2023 BSI
+[*] Sun Oct 29 17:55:45 2023
+[*]
+[dumpfile] "/home/ubuntu/code/seu_detector/cocotb/waves/wv_seu_detector.ghw"
+[dumpfile_mtime] "Sun Oct 29 17:54:45 2023"
+[dumpfile_size] 2437211
+[savefile] "/home/ubuntu/code/seu_detector/cocotb/waves/signals_seu_detector.gtkw"
+[timestart] 4131800000
+[size] 1619 874
+[pos] -1 -1
+*-25.000000 4220500000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.seu_detector.
+[treeopen] top.seu_detector.cnt_errors.
+[sst_width] 331
+[signals_width] 229
+[sst_expanded] 1
+[sst_vpaned_height] 251
+@28
+top.seu_detector.clk
+top.seu_detector.rst_n
+top.seu_detector.w_mem_en
+top.seu_detector.mmu_finish
+top.seu_detector.mem_clk
+@22
+#{top.seu_detector.addr[7:0]} top.seu_detector.addr[7] top.seu_detector.addr[6] top.seu_detector.addr[5] top.seu_detector.addr[4] top.seu_detector.addr[3] top.seu_detector.addr[2] top.seu_detector.addr[1] top.seu_detector.addr[0]
+#{top.seu_detector.mmu.data[39:0]} top.seu_detector.mmu.data[39] top.seu_detector.mmu.data[38] top.seu_detector.mmu.data[37] top.seu_detector.mmu.data[36] top.seu_detector.mmu.data[35] top.seu_detector.mmu.data[34] top.seu_detector.mmu.data[33] top.seu_detector.mmu.data[32] top.seu_detector.mmu.data[31] top.seu_detector.mmu.data[30] top.seu_detector.mmu.data[29] top.seu_detector.mmu.data[28] top.seu_detector.mmu.data[27] top.seu_detector.mmu.data[26] top.seu_detector.mmu.data[25] top.seu_detector.mmu.data[24] top.seu_detector.mmu.data[23] top.seu_detector.mmu.data[22] top.seu_detector.mmu.data[21] top.seu_detector.mmu.data[20] top.seu_detector.mmu.data[19] top.seu_detector.mmu.data[18] top.seu_detector.mmu.data[17] top.seu_detector.mmu.data[16] top.seu_detector.mmu.data[15] top.seu_detector.mmu.data[14] top.seu_detector.mmu.data[13] top.seu_detector.mmu.data[12] top.seu_detector.mmu.data[11] top.seu_detector.mmu.data[10] top.seu_detector.mmu.data[9] top.seu_detector.mmu.data[8] top.seu_detector.mmu.data[7] top.seu_detector.mmu.data[6] top.seu_detector.mmu.data[5] top.seu_detector.mmu.data[4] top.seu_detector.mmu.data[3] top.seu_detector.mmu.data[2] top.seu_detector.mmu.data[1] top.seu_detector.mmu.data[0]
+#{top.seu_detector.total_errors[9:0]} top.seu_detector.total_errors[9] top.seu_detector.total_errors[8] top.seu_detector.total_errors[7] top.seu_detector.total_errors[6] top.seu_detector.total_errors[5] top.seu_detector.total_errors[4] top.seu_detector.total_errors[3] top.seu_detector.total_errors[2] top.seu_detector.total_errors[1] top.seu_detector.total_errors[0]
+#{top.seu_detector.q_mem[0][39:0]} top.seu_detector.q_mem[0][39] top.seu_detector.q_mem[0][38] top.seu_detector.q_mem[0][37] top.seu_detector.q_mem[0][36] top.seu_detector.q_mem[0][35] top.seu_detector.q_mem[0][34] top.seu_detector.q_mem[0][33] top.seu_detector.q_mem[0][32] top.seu_detector.q_mem[0][31] top.seu_detector.q_mem[0][30] top.seu_detector.q_mem[0][29] top.seu_detector.q_mem[0][28] top.seu_detector.q_mem[0][27] top.seu_detector.q_mem[0][26] top.seu_detector.q_mem[0][25] top.seu_detector.q_mem[0][24] top.seu_detector.q_mem[0][23] top.seu_detector.q_mem[0][22] top.seu_detector.q_mem[0][21] top.seu_detector.q_mem[0][20] top.seu_detector.q_mem[0][19] top.seu_detector.q_mem[0][18] top.seu_detector.q_mem[0][17] top.seu_detector.q_mem[0][16] top.seu_detector.q_mem[0][15] top.seu_detector.q_mem[0][14] top.seu_detector.q_mem[0][13] top.seu_detector.q_mem[0][12] top.seu_detector.q_mem[0][11] top.seu_detector.q_mem[0][10] top.seu_detector.q_mem[0][9] top.seu_detector.q_mem[0][8] top.seu_detector.q_mem[0][7] top.seu_detector.q_mem[0][6] top.seu_detector.q_mem[0][5] top.seu_detector.q_mem[0][4] top.seu_detector.q_mem[0][3] top.seu_detector.q_mem[0][2] top.seu_detector.q_mem[0][1] top.seu_detector.q_mem[0][0]
+#{top.seu_detector.q_mem[1][39:0]} top.seu_detector.q_mem[1][39] top.seu_detector.q_mem[1][38] top.seu_detector.q_mem[1][37] top.seu_detector.q_mem[1][36] top.seu_detector.q_mem[1][35] top.seu_detector.q_mem[1][34] top.seu_detector.q_mem[1][33] top.seu_detector.q_mem[1][32] top.seu_detector.q_mem[1][31] top.seu_detector.q_mem[1][30] top.seu_detector.q_mem[1][29] top.seu_detector.q_mem[1][28] top.seu_detector.q_mem[1][27] top.seu_detector.q_mem[1][26] top.seu_detector.q_mem[1][25] top.seu_detector.q_mem[1][24] top.seu_detector.q_mem[1][23] top.seu_detector.q_mem[1][22] top.seu_detector.q_mem[1][21] top.seu_detector.q_mem[1][20] top.seu_detector.q_mem[1][19] top.seu_detector.q_mem[1][18] top.seu_detector.q_mem[1][17] top.seu_detector.q_mem[1][16] top.seu_detector.q_mem[1][15] top.seu_detector.q_mem[1][14] top.seu_detector.q_mem[1][13] top.seu_detector.q_mem[1][12] top.seu_detector.q_mem[1][11] top.seu_detector.q_mem[1][10] top.seu_detector.q_mem[1][9] top.seu_detector.q_mem[1][8] top.seu_detector.q_mem[1][7] top.seu_detector.q_mem[1][6] top.seu_detector.q_mem[1][5] top.seu_detector.q_mem[1][4] top.seu_detector.q_mem[1][3] top.seu_detector.q_mem[1][2] top.seu_detector.q_mem[1][1] top.seu_detector.q_mem[1][0]
+#{top.seu_detector.q_mem[2][39:0]} top.seu_detector.q_mem[2][39] top.seu_detector.q_mem[2][38] top.seu_detector.q_mem[2][37] top.seu_detector.q_mem[2][36] top.seu_detector.q_mem[2][35] top.seu_detector.q_mem[2][34] top.seu_detector.q_mem[2][33] top.seu_detector.q_mem[2][32] top.seu_detector.q_mem[2][31] top.seu_detector.q_mem[2][30] top.seu_detector.q_mem[2][29] top.seu_detector.q_mem[2][28] top.seu_detector.q_mem[2][27] top.seu_detector.q_mem[2][26] top.seu_detector.q_mem[2][25] top.seu_detector.q_mem[2][24] top.seu_detector.q_mem[2][23] top.seu_detector.q_mem[2][22] top.seu_detector.q_mem[2][21] top.seu_detector.q_mem[2][20] top.seu_detector.q_mem[2][19] top.seu_detector.q_mem[2][18] top.seu_detector.q_mem[2][17] top.seu_detector.q_mem[2][16] top.seu_detector.q_mem[2][15] top.seu_detector.q_mem[2][14] top.seu_detector.q_mem[2][13] top.seu_detector.q_mem[2][12] top.seu_detector.q_mem[2][11] top.seu_detector.q_mem[2][10] top.seu_detector.q_mem[2][9] top.seu_detector.q_mem[2][8] top.seu_detector.q_mem[2][7] top.seu_detector.q_mem[2][6] top.seu_detector.q_mem[2][5] top.seu_detector.q_mem[2][4] top.seu_detector.q_mem[2][3] top.seu_detector.q_mem[2][2] top.seu_detector.q_mem[2][1] top.seu_detector.q_mem[2][0]
+@25
+#{top.seu_detector.cnt_errors.dout[9:0]} top.seu_detector.cnt_errors.dout[9] top.seu_detector.cnt_errors.dout[8] top.seu_detector.cnt_errors.dout[7] top.seu_detector.cnt_errors.dout[6] top.seu_detector.cnt_errors.dout[5] top.seu_detector.cnt_errors.dout[4] top.seu_detector.cnt_errors.dout[3] top.seu_detector.cnt_errors.dout[2] top.seu_detector.cnt_errors.dout[1] top.seu_detector.cnt_errors.dout[0]
+[pattern_trace] 1
+[pattern_trace] 0

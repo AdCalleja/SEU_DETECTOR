@@ -4,15 +4,15 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 use work.bus_pkg.all;
 
-entity tb_count_errors_pattern is 
-end tb_count_errors_pattern;
+entity tb_count_bitflips_pattern is 
+end tb_count_bitflips_pattern;
 
-architecture rtl of tb_count_errors_pattern is	
+architecture rtl of tb_count_bitflips_pattern is	
 	--variable N_ARRAYS : integer := 1;
 	--variable DIN_WIDTH : integer := 40;
     signal din_test		:  bus_array(1 downto 0)(39 downto 0) := (("1010101010101010101010101010101110101010"),
 																					("0010101010101010101010101010101010101010"));
-    signal errors : std_logic_vector(integer(ceil(log2(real(40*2)))) downto 0);
+    signal bitflips : std_logic_vector(integer(ceil(log2(real(40*2)))) downto 0);
    
 	component ram_m10k IS
 		PORT
@@ -26,7 +26,7 @@ architecture rtl of tb_count_errors_pattern is
 		);
 		END component;
 
-	component count_errors_pattern is 
+	component count_bitflips_pattern is 
 		generic(
 			din_width:integer:=40;
 			n_arrays:integer:=1;
@@ -40,12 +40,12 @@ architecture rtl of tb_count_errors_pattern is
 
 begin
 
-	DUT: entity work.count_errors_pattern GENERIC MAP (
+	DUT: entity work.count_bitflips_pattern GENERIC MAP (
 		din_width=>40, 
-		n_arrays=>2, 
-		pattern=>"1010101010101010101010101010101010101010")
+		n_arrays=>2)
 		PORT MAP (
-			din => din_test, 
-			dout => errors);
+			din => din_test,
+			addr0=> '0', 
+			dout => bitflips);
 	
 end;

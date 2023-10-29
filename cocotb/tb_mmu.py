@@ -8,7 +8,7 @@ async def tb_mmu(dut):
     print("Executing mmu")
     cocotb.start_soon(Clock(dut.clk, 10, units="ns").start()) # == CLK <= not CLK after 10 ns; -- 50 MHz
 
-    # Simple Waveform gen
+    # Simple Waveform Gen
     # dut.rst_n.value = 0
     # await Timer(50, units="ns")
     # dut.rst_n.value = 1

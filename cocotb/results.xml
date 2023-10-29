@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1698609086" />
+    <testcase name="tb_mmu" classname="tb_seu_detector" file="/home/ubuntu/code/seu_detector/cocotb/tb_seu_detector.py" lineno="6" time="0.6855673789978027" sim_time_ns="6060.000001" ratio_time="8839.39374399467" />
+  </testsuite>
+</testsuites>

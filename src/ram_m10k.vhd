@@ -153,9 +153,4 @@ END SYN;
 -- Retrieval info: CONNECT: @data_a 0 0 40 0 data 0 0 40 0
 -- Retrieval info: CONNECT: @wren_a 0 0 0 0 wren 0 0 0 0
 -- Retrieval info: CONNECT: q 0 0 40 0 @q_a 0 0 40 0
--- Retrieval info: GEN_FILE: TYPE_NORMAL ram_m10k.vhd TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL ram_m10k.inc FALSE
--- Retrieval info: GEN_FILE: TYPE_NORMAL ram_m10k.cmp TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL ram_m10k.bsf TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL ram_m10k_inst.vhd TRUE
 -- Retrieval info: LIB_FILE: altera_mf

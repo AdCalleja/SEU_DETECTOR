@@ -9,9 +9,9 @@ SIM_ARGS += --wave=waves/wv_$(TOPLEVEL).ghw
 #export PYTHONPATH := $(PWD)/../model:$(PYTHONPATH)
 VHDL_SOURCES = $(PWD)/../src/*.vhd
 
-DUT ?= seu_detector # DUTs: count_errors_pattern, mmu
-TOPLEVEL = $(DUT)
-MODULE   = tb_$(DUT)
+DUT ?=seu_detector# DUTs: count_errors_pattern, mmu
+TOPLEVEL=$(DUT)
+MODULE = tb_$(DUT)
 
 include $(shell cocotb-config --makefiles)/Makefile.sim	
 
