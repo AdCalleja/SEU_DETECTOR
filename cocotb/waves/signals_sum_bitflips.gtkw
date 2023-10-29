@@ -1,0 +1,26 @@
+[*]
+[*] GTKWave Analyzer v3.3.117 (w)1999-2023 BSI
+[*] Sun Oct 29 21:41:24 2023
+[*]
+[dumpfile] "/home/ubuntu/code/seu_detector/cocotb/waves/wv_sum_bitflips.ghw"
+[dumpfile_mtime] "Sun Oct 29 20:57:13 2023"
+[dumpfile_size] 9625
+[savefile] "/home/ubuntu/code/seu_detector/cocotb/waves/signals_sum_bitflips.gtkw"
+[timestart] 2554450000
+[size] 1785 831
+[pos] -1 -1
+*-24.000000 2193500000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.sum_bitflips.
+[sst_width] 194
+[signals_width] 232
+[sst_expanded] 1
+[sst_vpaned_height] 237
+@28
+top.sum_bitflips.clk
+top.sum_bitflips.rst_n
+@24
+#{top.sum_bitflips.total_bitflips[17:0]} top.sum_bitflips.total_bitflips[17] top.sum_bitflips.total_bitflips[16] top.sum_bitflips.total_bitflips[15] top.sum_bitflips.total_bitflips[14] top.sum_bitflips.total_bitflips[13] top.sum_bitflips.total_bitflips[12] top.sum_bitflips.total_bitflips[11] top.sum_bitflips.total_bitflips[10] top.sum_bitflips.total_bitflips[9] top.sum_bitflips.total_bitflips[8] top.sum_bitflips.total_bitflips[7] top.sum_bitflips.total_bitflips[6] top.sum_bitflips.total_bitflips[5] top.sum_bitflips.total_bitflips[4] top.sum_bitflips.total_bitflips[3] top.sum_bitflips.total_bitflips[2] top.sum_bitflips.total_bitflips[1] top.sum_bitflips.total_bitflips[0]
+#{top.sum_bitflips.bitflips[9:0]} top.sum_bitflips.bitflips[9] top.sum_bitflips.bitflips[8] top.sum_bitflips.bitflips[7] top.sum_bitflips.bitflips[6] top.sum_bitflips.bitflips[5] top.sum_bitflips.bitflips[4] top.sum_bitflips.bitflips[3] top.sum_bitflips.bitflips[2] top.sum_bitflips.bitflips[1] top.sum_bitflips.bitflips[0]
+[pattern_trace] 1
+[pattern_trace] 0
