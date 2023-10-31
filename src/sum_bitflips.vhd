@@ -38,6 +38,6 @@ sum : process (clk) begin
     end if;
   end process;
   
-  --total_bitflips <= total_bitflips_temp;
+  --total_bitflips <= total_bitflips_temp; --SHOULD I USE A TEMP? I'M NOT SURE
 
 end rtl;

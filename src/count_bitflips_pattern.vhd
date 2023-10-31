@@ -40,7 +40,7 @@ architecture rtl of count_bitflips_pattern is
 
 begin
 
-  pattern_gen : process (addr0) begin
+  pattern_gen : process (all) begin
     if addr0 = '0' then -- Even
       pattern <= "1010101010101010101010101010101010101010";
     elsif addr0 = '1' then -- Odd

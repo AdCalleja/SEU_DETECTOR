@@ -3,11 +3,10 @@
 
 [libraries]
 
-# Defines library lib2
-#lib2.files = [
-#  'pkg2.vhd',
-#  'src/**/*.vhd',
-#]
+# Defines library work
+work.files = [
+  'src/*.vhd',
+]
 
 # Defines library lib1
 #lib1.files = [

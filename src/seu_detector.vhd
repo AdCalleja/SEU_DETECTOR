@@ -33,7 +33,7 @@ architecture rtl of seu_detector is
   signal r_out     : std_logic;
   -- Memory
   signal mem_clk    : std_logic;
-  signal data       : std_logic_vector(40 - 1 downto 0);
+  signal data       : std_logic_vector(MEM_WIDTH - 1 downto 0);
   signal addr       : std_logic_vector(integer(ceil(log2(real(MEM_ADDRS)))) - 1 downto 0);
   signal q_mem      : bus_array(N_MEMS - 1 downto 0)((MEM_WIDTH - 1) downto 0);
   signal mmu_finish : std_logic;
@@ -57,6 +57,7 @@ architecture rtl of seu_detector is
   end component;
 
 begin
+  -- I plan to STALL everything by stoping the clock from control uni
   clk <= clk_src;
 
   MMU : entity work.mmu generic

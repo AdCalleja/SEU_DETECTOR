@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1698616536" />
-    <testcase name="tb_count_bitflips" classname="tb_seu_detector" file="/home/ubuntu/code/seu_detector/cocotb/tb_seu_detector.py" lineno="6" time="0.45343947410583496" sim_time_ns="7560.000001" ratio_time="16672.56697469497" />
+    <property name="random_seed" value="1698694664" />
+    <testcase name="tb_count_bitflips" classname="tb_seu_detector" file="/home/ubuntu/code/seu_detector/cocotb/tb_seu_detector.py" lineno="6" time="0.4823911190032959" sim_time_ns="7560.000001" ratio_time="15671.930313767545" />
   </testsuite>
 </testsuites>
