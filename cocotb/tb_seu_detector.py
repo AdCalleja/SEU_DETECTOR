@@ -6,21 +6,31 @@ from cocotb.clock import Clock
 @cocotb.test()
 async def tb_seu_detetor(dut):
     print("Executing seu_detetor")
-    cocotb.start_soon(Clock(dut.clk, 10, units="ns").start()) # == CLK <= not CLK after 10 ns; -- 50 MHz 
+    cocotb.start_soon(Clock(dut.clk_src, 10, units="ns").start()) # == CLK <= not CLK after 10 ns; -- 50 MHz 
     
 
     # Init
     dut.rst_n.value = 0
+    dut.t_write_resolution = 0
     await Timer(50, units="ns")
-    # Write
+    # Set Config Params from SW
     dut.n_reads.value = 2 # Read 1 time every 0.5 seconds. 2 times to write
-    dut.t_write.value = 1
+    dut.t_write.value = 100
     dut.rst_n.value = 1
-    # Force errors
     await Timer(50, units="ns")
     # Get out of standby
     dut.en_sw.value = 1
-    await Timer(3000, units="ns")
+    # Force errors
+    await Timer(1500, units="ns")
+    dut.data.value = 0xFFFFFFFFFF
+    #await Timer(10, units="ns")
+    #dut.data.value = Release()
+    await Timer(1500, units="ns")
+    await Timer(10000, units="ns")
+
+
+
+
     assert 1==1
 
 
