@@ -14,6 +14,7 @@ entity seu_detector is
     en_sw : in std_logic; -- Defined from SW register
     n_reads : in std_logic_vector(15 downto 0);-- Defined from SW register. 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
     t_write : in std_logic_vector(13-1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
+    t_write_resolution : in std_logic; -- 0: t_write in 1e-6seconds / 0: t_write in 1s
     total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(40 * 256 * 10)))) downto 0) -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
   );
 end seu_detector;
@@ -69,7 +70,9 @@ begin
       w_mem_en => w_mem_en,
       r_out_en => r_out_en,
       n_reads => n_reads,-- 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
-      t_write => t_write); -- 8192s = 2.27hours max 
+      t_write => t_write, -- 8192s = 2.27hours max 
+      t_write_resolution => t_write_resolution
+      ); 
 
 
   -- I plan to STALL everything by stoping the clock from control uni
@@ -82,7 +85,7 @@ begin
     ) port map
     (
     clk        => clk,
-    rst_n      => rst_n,
+    rst_n      => mmu_rst_n,
     mem_clk    => mem_clk,
     data       => data,
     addr       => addr,
@@ -132,7 +135,7 @@ begin
     N_MEMS    => N_MEMS
  ) port map (
 	clk => mem_clk,
-	rst_n => rst_n,
+	rst_n => (rst_n and r_out_en), --If any of them 0 -> reset
 	bitflips => bitflips,
 	total_bitflips => total_bitflips
  );
@@ -144,7 +147,7 @@ begin
     N_MEMS    => N_MEMS
   )port map(
 	clk => mem_clk,
-	rst_n => rst_n,
+	rst_n => (rst_n and r_out_en),
 	en => r_out_en,
 	din => total_bitflips,
 	dout => total_bitflips_out
