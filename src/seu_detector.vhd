@@ -7,13 +7,16 @@ use work.bus_pkg.all;
 entity seu_detector is
   generic
   (
-    N_READS_TO_WRITE : integer := 1;
-    T_READ_OUT       : integer := 10000 -- Random value to test 100MHZ 
+    --N_READS_TO_WRITE : integer := 1;
+    --T_READ_OUT       : integer := 10000 -- Random value to test 100MHZ 
   );
   port
   (
     clk_src            : in std_logic;
     rst_n              : in std_logic;
+    en_sw : in std_logic; -- Defined from SW register
+    n_reads_mem : in std_logic_vector(15 downto 0);-- Defined from SW register. 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
+    t_read_out : in std_logic_vector(13-1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
     total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(40 * 256 * 10)))) downto 0) -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
   );
 end seu_detector;
@@ -30,7 +33,7 @@ architecture rtl of seu_detector is
   -- Control Unit
   signal mmu_rst_n : std_logic;
   signal w_mem_en  : std_logic;
-  signal r_out     : std_logic;
+  signal r_out_en     : std_logic;
   -- Memory
   signal mem_clk    : std_logic;
   signal data       : std_logic_vector(MEM_WIDTH - 1 downto 0);
@@ -57,8 +60,22 @@ architecture rtl of seu_detector is
   end component;
 
 begin
+
+  FSM_CONTROL_UNIT : entity work.fsm_control_unit port map
+    (
+      clk      => clk_src,
+      rst_n    => rst_n,
+      en_sw    => en_sw,
+      clk_out => clk,
+      mmu_rst_n => mmu_rst_n,
+      w_mem_en => w_mem_en,
+      r_out_en => r_out_en,
+      n_reads_mem => n_reads_mem,-- 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
+      t_read_out => t_read_out); -- 8192s = 2.27hours max 
+
+
   -- I plan to STALL everything by stoping the clock from control uni
-  clk <= clk_src;
+  --clk <= clk_src;
 
   MMU : entity work.mmu generic
     map(
@@ -130,7 +147,7 @@ begin
   )port map(
 	clk => mem_clk,
 	rst_n => rst_n,
-	en => r_out,
+	en => r_out_en,
 	din => total_bitflips,
 	dout => total_bitflips_out
 	);

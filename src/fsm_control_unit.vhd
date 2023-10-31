@@ -6,8 +6,8 @@ use ieee.math_real.all;
 entity fsm_control_unit is
   generic
   (
-    FREQ_READ_OUT    : integer := 1; --Test for 1 hz
-    N_READS_TO_WRITE : integer := 1 --Number of reads that have to be performed before rewritting mem
+    --FREQ_READ_OUT    : integer := 1; --Test for 1 hz
+    --N_READS_TO_WRITE : integer := 1 --Number of reads that have to be performed before rewritting mem
   );
   port
   (
@@ -18,7 +18,7 @@ entity fsm_control_unit is
     mmu_rst_n : out std_logic;
     w_mem_en : out std_logic;
     r_out_en : out std_logic;
-    n_read_mem : in std_logic_vector(15 downto 0);-- 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
+    n_reads_mem : in std_logic_vector(15 downto 0);-- 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
     t_read_out : in std_logic_vector(13-1 downto 0)); -- 8192s = 2.27hours max 
 end fsm_control_unit;
 
@@ -121,7 +121,7 @@ begin
     EN      => '1',
     CLC =>  w_mem_en_tmp,
     DIR => '1',
-    CNT_TO => n_read_mem,
+    CNT_TO => n_reads_mem,
     CNT => cnt_n_reads_mem
     );
 
@@ -129,7 +129,7 @@ begin
     CLK_DIV_SECONDS : entity work.clock_divider GENERIC MAP (LIMIT=>100000000) port map (clk, rst_n, seconds);
     CNR_READ_MEM : entity work.counter_gen generic
       map(
-      CNT_WDTH => 13 -- Has to at least match t_read_out size in case n_read_mem=1
+      CNT_WDTH => 13 -- Has to at least match t_read_out size in case n_reads_mem=1
       ) port map
       (
       clk     => seconds,
@@ -137,7 +137,7 @@ begin
       EN      => '1',
       CLC =>  w_mem_en_tmp,
       DIR => '1',
-      CNT_TO => std_logic_vector(unsigned(t_read_out)/unsigned(n_read_mem)), --others=0?
+      CNT_TO => std_logic_vector(unsigned(t_read_out)/unsigned(n_reads_mem)), --others=0?
       CNT => cnt_n_reads_mem
       );
 
