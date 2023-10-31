@@ -46,7 +46,7 @@ begin
   FSM_STATE : process (clk, rst_n)
   begin
     if (rst_n = '0') then
-      current_state <= WRITE;
+      current_state <= STANDBY;
     elsif (clk'event and clk = '1') then
       current_state <= next_state;
     end if;
@@ -83,7 +83,7 @@ begin
           cnt_read_out_clc <= '0';
           en               <= '1';
           if cnt_read = std_logic_vector(unsigned(t_write)/unsigned(n_reads)) then
-            next_state <= IDLE;
+            next_state <= READ_MEM;
           end if;
         when READ_MEM =>
           mmu_rst_n_tmp    <= '1';
@@ -93,7 +93,7 @@ begin
           cnt_read_out_clc <= '1';
           en               <= '1';
           if mmu_finish = '1' then
-            next_state <= IDLE;
+            next_state <= READ_OUT;
           end if;
         when READ_OUT =>
           mmu_rst_n_tmp    <= '0';
