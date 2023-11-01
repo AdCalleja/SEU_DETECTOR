@@ -85,7 +85,7 @@ begin
     ) port map
     (
     clk        => clk,
-    rst_n      => mmu_rst_n,
+    rst_n      => (rst_n and mmu_rst_n), --Also reset with the normal rst
     mem_clk    => mem_clk,
     data       => data,
     addr       => addr,
@@ -135,7 +135,7 @@ begin
     N_MEMS    => N_MEMS
  ) port map (
 	clk => mem_clk,
-	rst_n => (rst_n and r_out_en), --If any of them 0 -> reset
+	rst_n => (rst_n and mmu_rst_n and not(w_mem_en)), --If any of them 0 -> reset
 	bitflips => bitflips,
 	total_bitflips => total_bitflips
  );

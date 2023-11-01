@@ -1,39 +1,90 @@
 [*]
 [*] GTKWave Analyzer v3.3.117 (w)1999-2023 BSI
-[*] Sun Oct 29 20:36:44 2023
+[*] Wed Nov  1 16:41:42 2023
 [*]
 [dumpfile] "/home/ubuntu/code/seu_detector/cocotb/waves/wv_seu_detector.ghw"
-[dumpfile_mtime] "Sun Oct 29 19:51:27 2023"
-[dumpfile_size] 2438289
+[dumpfile_mtime] "Wed Nov  1 14:48:06 2023"
+[dumpfile_size] 2079411
 [savefile] "/home/ubuntu/code/seu_detector/cocotb/waves/signals_seu_detector.gtkw"
-[timestart] 5600560000
-[size] 1619 874
+[timestart] 877000000
+[size] 1920 1000
 [pos] -1 -1
-*-22.000000 5601730000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-28.000000 2320000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.
 [treeopen] top.seu_detector.
-[treeopen] top.seu_detector.cnt_errors.
+[treeopen] top.seu_detector.cnt_bitflips.din.
+[treeopen] top.seu_detector.gen_m10k[0].
+[treeopen] top.seu_detector.gen_m10k[0].ram_m10k_inst.
+[treeopen] top.seu_detector.gen_m10k[9].ram_m10k_inst.
+[treeopen] top.seu_detector.q_mem.
 [sst_width] 331
-[signals_width] 229
+[signals_width] 353
 [sst_expanded] 1
-[sst_vpaned_height] 251
+[sst_vpaned_height] 295
 @28
+top.seu_detector.clk_src
 top.seu_detector.clk
 top.seu_detector.rst_n
-top.seu_detector.w_mem_en
-top.seu_detector.mmu_finish
-top.seu_detector.mem_clk
-@22
+top.seu_detector.fsm_control_unit.en_sw
+@420
+top.seu_detector.fsm_control_unit.current_state
+top.seu_detector.fsm_control_unit.next_state
+@24
 #{top.seu_detector.addr[7:0]} top.seu_detector.addr[7] top.seu_detector.addr[6] top.seu_detector.addr[5] top.seu_detector.addr[4] top.seu_detector.addr[3] top.seu_detector.addr[2] top.seu_detector.addr[1] top.seu_detector.addr[0]
+@c00023
 #{top.seu_detector.mmu.data[39:0]} top.seu_detector.mmu.data[39] top.seu_detector.mmu.data[38] top.seu_detector.mmu.data[37] top.seu_detector.mmu.data[36] top.seu_detector.mmu.data[35] top.seu_detector.mmu.data[34] top.seu_detector.mmu.data[33] top.seu_detector.mmu.data[32] top.seu_detector.mmu.data[31] top.seu_detector.mmu.data[30] top.seu_detector.mmu.data[29] top.seu_detector.mmu.data[28] top.seu_detector.mmu.data[27] top.seu_detector.mmu.data[26] top.seu_detector.mmu.data[25] top.seu_detector.mmu.data[24] top.seu_detector.mmu.data[23] top.seu_detector.mmu.data[22] top.seu_detector.mmu.data[21] top.seu_detector.mmu.data[20] top.seu_detector.mmu.data[19] top.seu_detector.mmu.data[18] top.seu_detector.mmu.data[17] top.seu_detector.mmu.data[16] top.seu_detector.mmu.data[15] top.seu_detector.mmu.data[14] top.seu_detector.mmu.data[13] top.seu_detector.mmu.data[12] top.seu_detector.mmu.data[11] top.seu_detector.mmu.data[10] top.seu_detector.mmu.data[9] top.seu_detector.mmu.data[8] top.seu_detector.mmu.data[7] top.seu_detector.mmu.data[6] top.seu_detector.mmu.data[5] top.seu_detector.mmu.data[4] top.seu_detector.mmu.data[3] top.seu_detector.mmu.data[2] top.seu_detector.mmu.data[1] top.seu_detector.mmu.data[0]
-#{top.seu_detector.q_mem[0][39:0]} top.seu_detector.q_mem[0][39] top.seu_detector.q_mem[0][38] top.seu_detector.q_mem[0][37] top.seu_detector.q_mem[0][36] top.seu_detector.q_mem[0][35] top.seu_detector.q_mem[0][34] top.seu_detector.q_mem[0][33] top.seu_detector.q_mem[0][32] top.seu_detector.q_mem[0][31] top.seu_detector.q_mem[0][30] top.seu_detector.q_mem[0][29] top.seu_detector.q_mem[0][28] top.seu_detector.q_mem[0][27] top.seu_detector.q_mem[0][26] top.seu_detector.q_mem[0][25] top.seu_detector.q_mem[0][24] top.seu_detector.q_mem[0][23] top.seu_detector.q_mem[0][22] top.seu_detector.q_mem[0][21] top.seu_detector.q_mem[0][20] top.seu_detector.q_mem[0][19] top.seu_detector.q_mem[0][18] top.seu_detector.q_mem[0][17] top.seu_detector.q_mem[0][16] top.seu_detector.q_mem[0][15] top.seu_detector.q_mem[0][14] top.seu_detector.q_mem[0][13] top.seu_detector.q_mem[0][12] top.seu_detector.q_mem[0][11] top.seu_detector.q_mem[0][10] top.seu_detector.q_mem[0][9] top.seu_detector.q_mem[0][8] top.seu_detector.q_mem[0][7] top.seu_detector.q_mem[0][6] top.seu_detector.q_mem[0][5] top.seu_detector.q_mem[0][4] top.seu_detector.q_mem[0][3] top.seu_detector.q_mem[0][2] top.seu_detector.q_mem[0][1] top.seu_detector.q_mem[0][0]
-#{top.seu_detector.q_mem[1][39:0]} top.seu_detector.q_mem[1][39] top.seu_detector.q_mem[1][38] top.seu_detector.q_mem[1][37] top.seu_detector.q_mem[1][36] top.seu_detector.q_mem[1][35] top.seu_detector.q_mem[1][34] top.seu_detector.q_mem[1][33] top.seu_detector.q_mem[1][32] top.seu_detector.q_mem[1][31] top.seu_detector.q_mem[1][30] top.seu_detector.q_mem[1][29] top.seu_detector.q_mem[1][28] top.seu_detector.q_mem[1][27] top.seu_detector.q_mem[1][26] top.seu_detector.q_mem[1][25] top.seu_detector.q_mem[1][24] top.seu_detector.q_mem[1][23] top.seu_detector.q_mem[1][22] top.seu_detector.q_mem[1][21] top.seu_detector.q_mem[1][20] top.seu_detector.q_mem[1][19] top.seu_detector.q_mem[1][18] top.seu_detector.q_mem[1][17] top.seu_detector.q_mem[1][16] top.seu_detector.q_mem[1][15] top.seu_detector.q_mem[1][14] top.seu_detector.q_mem[1][13] top.seu_detector.q_mem[1][12] top.seu_detector.q_mem[1][11] top.seu_detector.q_mem[1][10] top.seu_detector.q_mem[1][9] top.seu_detector.q_mem[1][8] top.seu_detector.q_mem[1][7] top.seu_detector.q_mem[1][6] top.seu_detector.q_mem[1][5] top.seu_detector.q_mem[1][4] top.seu_detector.q_mem[1][3] top.seu_detector.q_mem[1][2] top.seu_detector.q_mem[1][1] top.seu_detector.q_mem[1][0]
-#{top.seu_detector.q_mem[2][39:0]} top.seu_detector.q_mem[2][39] top.seu_detector.q_mem[2][38] top.seu_detector.q_mem[2][37] top.seu_detector.q_mem[2][36] top.seu_detector.q_mem[2][35] top.seu_detector.q_mem[2][34] top.seu_detector.q_mem[2][33] top.seu_detector.q_mem[2][32] top.seu_detector.q_mem[2][31] top.seu_detector.q_mem[2][30] top.seu_detector.q_mem[2][29] top.seu_detector.q_mem[2][28] top.seu_detector.q_mem[2][27] top.seu_detector.q_mem[2][26] top.seu_detector.q_mem[2][25] top.seu_detector.q_mem[2][24] top.seu_detector.q_mem[2][23] top.seu_detector.q_mem[2][22] top.seu_detector.q_mem[2][21] top.seu_detector.q_mem[2][20] top.seu_detector.q_mem[2][19] top.seu_detector.q_mem[2][18] top.seu_detector.q_mem[2][17] top.seu_detector.q_mem[2][16] top.seu_detector.q_mem[2][15] top.seu_detector.q_mem[2][14] top.seu_detector.q_mem[2][13] top.seu_detector.q_mem[2][12] top.seu_detector.q_mem[2][11] top.seu_detector.q_mem[2][10] top.seu_detector.q_mem[2][9] top.seu_detector.q_mem[2][8] top.seu_detector.q_mem[2][7] top.seu_detector.q_mem[2][6] top.seu_detector.q_mem[2][5] top.seu_detector.q_mem[2][4] top.seu_detector.q_mem[2][3] top.seu_detector.q_mem[2][2] top.seu_detector.q_mem[2][1] top.seu_detector.q_mem[2][0]
 @28
-top.seu_detector.cnt_errors.addr0
+top.seu_detector.mmu.data[39]
+top.seu_detector.mmu.data[38]
+top.seu_detector.mmu.data[37]
+top.seu_detector.mmu.data[36]
+top.seu_detector.mmu.data[35]
+top.seu_detector.mmu.data[34]
+top.seu_detector.mmu.data[33]
+top.seu_detector.mmu.data[32]
+top.seu_detector.mmu.data[31]
+top.seu_detector.mmu.data[30]
+top.seu_detector.mmu.data[29]
+top.seu_detector.mmu.data[28]
+top.seu_detector.mmu.data[27]
+top.seu_detector.mmu.data[26]
+top.seu_detector.mmu.data[25]
+top.seu_detector.mmu.data[24]
+top.seu_detector.mmu.data[23]
+top.seu_detector.mmu.data[22]
+top.seu_detector.mmu.data[21]
+top.seu_detector.mmu.data[20]
+top.seu_detector.mmu.data[19]
+top.seu_detector.mmu.data[18]
+top.seu_detector.mmu.data[17]
+top.seu_detector.mmu.data[16]
+top.seu_detector.mmu.data[15]
+top.seu_detector.mmu.data[14]
+top.seu_detector.mmu.data[13]
+top.seu_detector.mmu.data[12]
+top.seu_detector.mmu.data[11]
+top.seu_detector.mmu.data[10]
+top.seu_detector.mmu.data[9]
+top.seu_detector.mmu.data[8]
+top.seu_detector.mmu.data[7]
+top.seu_detector.mmu.data[6]
+top.seu_detector.mmu.data[5]
+top.seu_detector.mmu.data[4]
+top.seu_detector.mmu.data[3]
+top.seu_detector.mmu.data[2]
+top.seu_detector.mmu.data[1]
+top.seu_detector.mmu.data[0]
+@1401201
+-group_end
+@200
+-mmu.data
 @22
-#{top.seu_detector.cnt_errors.pattern[39:0]} top.seu_detector.cnt_errors.pattern[39] top.seu_detector.cnt_errors.pattern[38] top.seu_detector.cnt_errors.pattern[37] top.seu_detector.cnt_errors.pattern[36] top.seu_detector.cnt_errors.pattern[35] top.seu_detector.cnt_errors.pattern[34] top.seu_detector.cnt_errors.pattern[33] top.seu_detector.cnt_errors.pattern[32] top.seu_detector.cnt_errors.pattern[31] top.seu_detector.cnt_errors.pattern[30] top.seu_detector.cnt_errors.pattern[29] top.seu_detector.cnt_errors.pattern[28] top.seu_detector.cnt_errors.pattern[27] top.seu_detector.cnt_errors.pattern[26] top.seu_detector.cnt_errors.pattern[25] top.seu_detector.cnt_errors.pattern[24] top.seu_detector.cnt_errors.pattern[23] top.seu_detector.cnt_errors.pattern[22] top.seu_detector.cnt_errors.pattern[21] top.seu_detector.cnt_errors.pattern[20] top.seu_detector.cnt_errors.pattern[19] top.seu_detector.cnt_errors.pattern[18] top.seu_detector.cnt_errors.pattern[17] top.seu_detector.cnt_errors.pattern[16] top.seu_detector.cnt_errors.pattern[15] top.seu_detector.cnt_errors.pattern[14] top.seu_detector.cnt_errors.pattern[13] top.seu_detector.cnt_errors.pattern[12] top.seu_detector.cnt_errors.pattern[11] top.seu_detector.cnt_errors.pattern[10] top.seu_detector.cnt_errors.pattern[9] top.seu_detector.cnt_errors.pattern[8] top.seu_detector.cnt_errors.pattern[7] top.seu_detector.cnt_errors.pattern[6] top.seu_detector.cnt_errors.pattern[5] top.seu_detector.cnt_errors.pattern[4] top.seu_detector.cnt_errors.pattern[3] top.seu_detector.cnt_errors.pattern[2] top.seu_detector.cnt_errors.pattern[1] top.seu_detector.cnt_errors.pattern[0]
-@23
-#{top.seu_detector.total_bitflips[9:0]} top.seu_detector.total_bitflips[9] top.seu_detector.total_bitflips[8] top.seu_detector.total_bitflips[7] top.seu_detector.total_bitflips[6] top.seu_detector.total_bitflips[5] top.seu_detector.total_bitflips[4] top.seu_detector.total_bitflips[3] top.seu_detector.total_bitflips[2] top.seu_detector.total_bitflips[1] top.seu_detector.total_bitflips[0]
+#{top.seu_detector.mmu.counter[8:0]} top.seu_detector.mmu.counter[8] top.seu_detector.mmu.counter[7] top.seu_detector.mmu.counter[6] top.seu_detector.mmu.counter[5] top.seu_detector.mmu.counter[4] top.seu_detector.mmu.counter[3] top.seu_detector.mmu.counter[2] top.seu_detector.mmu.counter[1] top.seu_detector.mmu.counter[0]
+#{top.seu_detector.data[39:0]} top.seu_detector.data[39] top.seu_detector.data[38] top.seu_detector.data[37] top.seu_detector.data[36] top.seu_detector.data[35] top.seu_detector.data[34] top.seu_detector.data[33] top.seu_detector.data[32] top.seu_detector.data[31] top.seu_detector.data[30] top.seu_detector.data[29] top.seu_detector.data[28] top.seu_detector.data[27] top.seu_detector.data[26] top.seu_detector.data[25] top.seu_detector.data[24] top.seu_detector.data[23] top.seu_detector.data[22] top.seu_detector.data[21] top.seu_detector.data[20] top.seu_detector.data[19] top.seu_detector.data[18] top.seu_detector.data[17] top.seu_detector.data[16] top.seu_detector.data[15] top.seu_detector.data[14] top.seu_detector.data[13] top.seu_detector.data[12] top.seu_detector.data[11] top.seu_detector.data[10] top.seu_detector.data[9] top.seu_detector.data[8] top.seu_detector.data[7] top.seu_detector.data[6] top.seu_detector.data[5] top.seu_detector.data[4] top.seu_detector.data[3] top.seu_detector.data[2] top.seu_detector.data[1] top.seu_detector.data[0]
+#{top.seu_detector.sum_bitflips.total_bitflips[17:0]} top.seu_detector.sum_bitflips.total_bitflips[17] top.seu_detector.sum_bitflips.total_bitflips[16] top.seu_detector.sum_bitflips.total_bitflips[15] top.seu_detector.sum_bitflips.total_bitflips[14] top.seu_detector.sum_bitflips.total_bitflips[13] top.seu_detector.sum_bitflips.total_bitflips[12] top.seu_detector.sum_bitflips.total_bitflips[11] top.seu_detector.sum_bitflips.total_bitflips[10] top.seu_detector.sum_bitflips.total_bitflips[9] top.seu_detector.sum_bitflips.total_bitflips[8] top.seu_detector.sum_bitflips.total_bitflips[7] top.seu_detector.sum_bitflips.total_bitflips[6] top.seu_detector.sum_bitflips.total_bitflips[5] top.seu_detector.sum_bitflips.total_bitflips[4] top.seu_detector.sum_bitflips.total_bitflips[3] top.seu_detector.sum_bitflips.total_bitflips[2] top.seu_detector.sum_bitflips.total_bitflips[1] top.seu_detector.sum_bitflips.total_bitflips[0]
+#{top.seu_detector.total_bitflips_out[17:0]} top.seu_detector.total_bitflips_out[17] top.seu_detector.total_bitflips_out[16] top.seu_detector.total_bitflips_out[15] top.seu_detector.total_bitflips_out[14] top.seu_detector.total_bitflips_out[13] top.seu_detector.total_bitflips_out[12] top.seu_detector.total_bitflips_out[11] top.seu_detector.total_bitflips_out[10] top.seu_detector.total_bitflips_out[9] top.seu_detector.total_bitflips_out[8] top.seu_detector.total_bitflips_out[7] top.seu_detector.total_bitflips_out[6] top.seu_detector.total_bitflips_out[5] top.seu_detector.total_bitflips_out[4] top.seu_detector.total_bitflips_out[3] top.seu_detector.total_bitflips_out[2] top.seu_detector.total_bitflips_out[1] top.seu_detector.total_bitflips_out[0]
+#{top.seu_detector.cnt_bitflips.din[0][39:0]} top.seu_detector.cnt_bitflips.din[0][39] top.seu_detector.cnt_bitflips.din[0][38] top.seu_detector.cnt_bitflips.din[0][37] top.seu_detector.cnt_bitflips.din[0][36] top.seu_detector.cnt_bitflips.din[0][35] top.seu_detector.cnt_bitflips.din[0][34] top.seu_detector.cnt_bitflips.din[0][33] top.seu_detector.cnt_bitflips.din[0][32] top.seu_detector.cnt_bitflips.din[0][31] top.seu_detector.cnt_bitflips.din[0][30] top.seu_detector.cnt_bitflips.din[0][29] top.seu_detector.cnt_bitflips.din[0][28] top.seu_detector.cnt_bitflips.din[0][27] top.seu_detector.cnt_bitflips.din[0][26] top.seu_detector.cnt_bitflips.din[0][25] top.seu_detector.cnt_bitflips.din[0][24] top.seu_detector.cnt_bitflips.din[0][23] top.seu_detector.cnt_bitflips.din[0][22] top.seu_detector.cnt_bitflips.din[0][21] top.seu_detector.cnt_bitflips.din[0][20] top.seu_detector.cnt_bitflips.din[0][19] top.seu_detector.cnt_bitflips.din[0][18] top.seu_detector.cnt_bitflips.din[0][17] top.seu_detector.cnt_bitflips.din[0][16] top.seu_detector.cnt_bitflips.din[0][15] top.seu_detector.cnt_bitflips.din[0][14] top.seu_detector.cnt_bitflips.din[0][13] top.seu_detector.cnt_bitflips.din[0][12] top.seu_detector.cnt_bitflips.din[0][11] top.seu_detector.cnt_bitflips.din[0][10] top.seu_detector.cnt_bitflips.din[0][9] top.seu_detector.cnt_bitflips.din[0][8] top.seu_detector.cnt_bitflips.din[0][7] top.seu_detector.cnt_bitflips.din[0][6] top.seu_detector.cnt_bitflips.din[0][5] top.seu_detector.cnt_bitflips.din[0][4] top.seu_detector.cnt_bitflips.din[0][3] top.seu_detector.cnt_bitflips.din[0][2] top.seu_detector.cnt_bitflips.din[0][1] top.seu_detector.cnt_bitflips.din[0][0]
+#{top.seu_detector.cnt_bitflips.din[0][39:0]} top.seu_detector.cnt_bitflips.din[0][39] top.seu_detector.cnt_bitflips.din[0][38] top.seu_detector.cnt_bitflips.din[0][37] top.seu_detector.cnt_bitflips.din[0][36] top.seu_detector.cnt_bitflips.din[0][35] top.seu_detector.cnt_bitflips.din[0][34] top.seu_detector.cnt_bitflips.din[0][33] top.seu_detector.cnt_bitflips.din[0][32] top.seu_detector.cnt_bitflips.din[0][31] top.seu_detector.cnt_bitflips.din[0][30] top.seu_detector.cnt_bitflips.din[0][29] top.seu_detector.cnt_bitflips.din[0][28] top.seu_detector.cnt_bitflips.din[0][27] top.seu_detector.cnt_bitflips.din[0][26] top.seu_detector.cnt_bitflips.din[0][25] top.seu_detector.cnt_bitflips.din[0][24] top.seu_detector.cnt_bitflips.din[0][23] top.seu_detector.cnt_bitflips.din[0][22] top.seu_detector.cnt_bitflips.din[0][21] top.seu_detector.cnt_bitflips.din[0][20] top.seu_detector.cnt_bitflips.din[0][19] top.seu_detector.cnt_bitflips.din[0][18] top.seu_detector.cnt_bitflips.din[0][17] top.seu_detector.cnt_bitflips.din[0][16] top.seu_detector.cnt_bitflips.din[0][15] top.seu_detector.cnt_bitflips.din[0][14] top.seu_detector.cnt_bitflips.din[0][13] top.seu_detector.cnt_bitflips.din[0][12] top.seu_detector.cnt_bitflips.din[0][11] top.seu_detector.cnt_bitflips.din[0][10] top.seu_detector.cnt_bitflips.din[0][9] top.seu_detector.cnt_bitflips.din[0][8] top.seu_detector.cnt_bitflips.din[0][7] top.seu_detector.cnt_bitflips.din[0][6] top.seu_detector.cnt_bitflips.din[0][5] top.seu_detector.cnt_bitflips.din[0][4] top.seu_detector.cnt_bitflips.din[0][3] top.seu_detector.cnt_bitflips.din[0][2] top.seu_detector.cnt_bitflips.din[0][1] top.seu_detector.cnt_bitflips.din[0][0]
+#{top.seu_detector.gen_m10k[0].ram_m10k_inst.data[39:0]} top.seu_detector.gen_m10k[0].ram_m10k_inst.data[39] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[38] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[37] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[36] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[35] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[34] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[33] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[32] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[31] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[30] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[29] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[28] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[27] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[26] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[25] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[24] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[23] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[22] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[21] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[20] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[19] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[18] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[17] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[16] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[15] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[14] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[13] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[12] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[11] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[10] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[9] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[8] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[7] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[6] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[5] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[4] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[3] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[2] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[1] top.seu_detector.gen_m10k[0].ram_m10k_inst.data[0]
 [pattern_trace] 1
 [pattern_trace] 0
