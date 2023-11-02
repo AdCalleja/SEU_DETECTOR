@@ -20,7 +20,7 @@ entity seu_detector is
     t_write            : in std_logic_vector(13 - 1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
     t_write_resolution : in std_logic; -- 0: t_write in 1e-6seconds / 0: t_write in 1s
     total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0); -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
-    r_out_en           : out std_logic
+    r_out_en           : buffer std_logic
   );
 end seu_detector;
 

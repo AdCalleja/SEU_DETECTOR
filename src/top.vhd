@@ -15,7 +15,7 @@ entity top is
     DATA_OUT       : buffer std_logic_vector(31 downto 0); --             .readdata
     WRITE_EN       : in std_logic;
     DATA_IN        : in std_logic_vector(31 downto 0) := (others => '0');--    avalon_st.data
-    INS_IRQ0       : out std_logic
+    INS_IRQ0       : buffer std_logic
     --EMPTY           : in  std_logic                     := '0';             --             .empty
     --END_OF_PACKET   : in  std_logic                     := '0';             --             .endofpacket
     --READY           : out std_logic;                                        --             .ready
