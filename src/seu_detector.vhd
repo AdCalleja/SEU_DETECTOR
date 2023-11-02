@@ -15,13 +15,13 @@ entity seu_detector is
   (
     clk_src            : in std_logic;
     rst_n              : in std_logic;
-    en_sw : in std_logic; -- Defined from SW register
-    n_reads : in std_logic_vector(15 downto 0);-- Defined from SW register. 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
-    t_write : in std_logic_vector(13-1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
+    en_sw              : in std_logic; -- Defined from SW register
+    n_reads            : in std_logic_vector(15 downto 0);-- Defined from SW register. 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
+    t_write            : in std_logic_vector(13 - 1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
     t_write_resolution : in std_logic; -- 0: t_write in 1e-6seconds / 0: t_write in 1s
     total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0); -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
-    r_out_en     : out std_logic
-    );
+    r_out_en           : out std_logic
+  );
 end seu_detector;
 
 architecture rtl of seu_detector is
@@ -45,11 +45,11 @@ architecture rtl of seu_detector is
   signal mmu_finish : std_logic;
 
   -- Count Errors
-  signal bitflips       : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_MEMS)))) downto 0); -- Number of errros in binary	
+  signal bitflips             : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_MEMS)))) downto 0); -- Number of errros in binary	
   signal addr0_count_bitflips : std_logic; -- Used to cope with the delay introduced by the memory from write to q
 
   -- Add errors
-  signal total_bitflips       : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0); -- Number of errros in binary	
+  signal total_bitflips : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0); -- Number of errros in binary	
 
   component ram_m10k
     port
@@ -66,20 +66,18 @@ begin
 
   FSM_CONTROL_UNIT : entity work.fsm_control_unit port map
     (
-      clk      => clk_src,
-      rst_n    => rst_n,
-      en_sw    => en_sw,
-      mmu_finish => mmu_finish,
-      clk_out => clk,
-      mmu_rst_n => mmu_rst_n,
-      w_mem_en => w_mem_en,
-      r_out_en => r_out_en,
-      n_reads => n_reads,-- 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
-      t_write => t_write, -- 8192s = 2.27hours max 
-      t_write_resolution => t_write_resolution
-      ); 
-
-
+    clk                => clk_src,
+    rst_n              => rst_n,
+    en_sw              => en_sw,
+    mmu_finish         => mmu_finish,
+    clk_out            => clk,
+    mmu_rst_n          => mmu_rst_n,
+    w_mem_en           => w_mem_en,
+    r_out_en           => r_out_en,
+    n_reads            => n_reads, -- 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
+    t_write            => t_write, -- 8192s = 2.27hours max 
+    t_write_resolution => t_write_resolution
+    );
   -- I plan to STALL everything by stoping the clock from control uni
   --clk <= clk_src;
 
@@ -87,7 +85,8 @@ begin
     map(
     MEM_WIDTH => MEM_WIDTH,
     MEM_ADDRS => MEM_ADDRS
-    ) port map
+    ) port
+    map
     (
     clk        => clk,
     rst_n      => (rst_n and mmu_rst_n), --Also reset with the normal rst
@@ -113,7 +112,7 @@ begin
   reg : process (clk) begin
     if rising_edge(clk) then
       if rst_n = '1' then
-        addr0_count_bitflips <= addr(0);  -- Todo: change this to not only 0 to feed it also to the SW
+        addr0_count_bitflips <= addr(0); -- Todo: change this to not only be the las bit, to send it to the SW
       else
         addr0_count_bitflips <= '0'; -- Not sure if this reset is needed
       end if;
@@ -132,30 +131,30 @@ begin
     din   => q_mem,
     addr0 => addr0_count_bitflips,
     dout  => bitflips);
-
-
- SUM_BITFLIPS : entity work.sum_bitflips generic map(
+  SUM_BITFLIPS : entity work.sum_bitflips generic
+    map(
     MEM_WIDTH => MEM_WIDTH,
-	MEM_ADDRS => MEM_ADDRS,
+    MEM_ADDRS => MEM_ADDRS,
     N_MEMS    => N_MEMS
- ) port map (
-	clk => mem_clk,
-	rst_n => (rst_n and mmu_rst_n and not(w_mem_en)), --If any of them 0 -> reset
-	bitflips => bitflips,
-	total_bitflips => total_bitflips
- );
-
-
- READ_OUT_REG : entity work.read_out_reg generic map(
+    ) port
+    map (
+    clk            => mem_clk,
+    rst_n          => (rst_n and mmu_rst_n and not(w_mem_en)), --If any of them 0 -> reset
+    bitflips       => bitflips,
+    total_bitflips => total_bitflips
+    );
+  READ_OUT_REG : entity work.read_out_reg generic
+    map(
     MEM_WIDTH => MEM_WIDTH,
-	MEM_ADDRS => MEM_ADDRS,
+    MEM_ADDRS => MEM_ADDRS,
     N_MEMS    => N_MEMS
-  )port map(
-	clk => mem_clk,
-	rst_n => (rst_n and r_out_en),
-	en => r_out_en,
-	din => total_bitflips,
-	dout => total_bitflips_out
-	);
+    )port
+    map(
+    clk   => mem_clk,
+    rst_n => (rst_n and r_out_en),
+    en    => r_out_en,
+    din   => total_bitflips,
+    dout  => total_bitflips_out
+    );
 
 end rtl;

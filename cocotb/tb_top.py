@@ -59,7 +59,8 @@ async def tb_top(dut):
 
 
 
-    # Stop Exp
+    # Handle IRQ and Disable it
+    await Timer(4200, units="ns") # Markers calculated 4180 (Wait 2 clocks to read it)
 
 
     # Reset back

@@ -40,6 +40,8 @@ architecture rtl of top is
 
   -- INTERRUPT
   signal r_out_en : std_logic;
+  signal r_out_en_tmp : std_logic;
+  signal total_bitflips_out_irq : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0);
 
 begin
 
@@ -70,7 +72,7 @@ begin
         elsif READ_EN then -- READ
           case OFFSET_ADDRESS is
             when "00000000" =>
-              DATA_OUT <= total_bitflips_out;
+              DATA_OUT <= total_bitflips_out_irq;
             when others =>
               DATA_OUT <= DATA_OUT;
           end case;
@@ -111,23 +113,40 @@ begin
     t_write            => t_write,
     t_write_resolution => t_write_resolution,
     total_bitflips_out => total_bitflips_out, --TODO INTERRUP CONTROLLER FOR THIS. See if it's worth testing like this or implement the IRQ first BOTH probably
-    r_out_en           => r_out_en
+    r_out_en           => r_out_en_tmp
     );
 
   -- Delay IRQTrigger/DataAvailable
   reg : process (CLK_SRC) begin
     if rising_edge(CLK_SRC) then
       if RESET_N = '1' then
+        r_out_en <= r_out_en_tmp;
+      else
+        r_out_en <= '0';
+      end if;
+    else
+      r_out_en <= r_out_en;
+    end if;
+  end process;
+
+  -- IRQ Servicing complaying with Avalon
+  IRQ_Server : process (CLK_SRC) begin
+    if rising_edge(CLK_SRC) then
+      if RESET_N = '1' then
         if r_out_en = '1' then
           INS_IRQ0 <= r_out_en; -- Latch until IRQ is attended
+          total_bitflips_out_irq <= total_bitflips_out;
         elsif READ_EN = '1' and OFFSET_ADDRESS = "00000000" then
           INS_IRQ0 <= '0'; -- IRQ attended when read the addr 0
+          total_bitflips_out_irq <= (others => '0'); 
         end if;
       else
         INS_IRQ0 <= '0'; -- Not sure if this reset is needed
+        total_bitflips_out_irq <= (others => '0'); 
       end if;
     else
       INS_IRQ0 <= INS_IRQ0;
+      total_bitflips_out_irq <= total_bitflips_out_irq; 
     end if;
   end process;
 end architecture rtl; -- of debayer
