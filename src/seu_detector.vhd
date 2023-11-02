@@ -5,8 +5,12 @@ use ieee.math_real.all;
 use work.bus_pkg.all;
 
 entity seu_detector is
-  -- generic
-  -- ();
+  generic
+  (
+    N_MEMS    : integer := 10;
+    MEM_WIDTH : integer := 40;
+    MEM_ADDRS : integer := 256
+  );
   port
   (
     clk_src            : in std_logic;
@@ -15,15 +19,15 @@ entity seu_detector is
     n_reads : in std_logic_vector(15 downto 0);-- Defined from SW register. 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
     t_write : in std_logic_vector(13-1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
     t_write_resolution : in std_logic; -- 0: t_write in 1e-6seconds / 0: t_write in 1s
-    total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(40 * 256 * 10)))) downto 0) -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
+    total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0) -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
   );
 end seu_detector;
 
 architecture rtl of seu_detector is
   -- CONSTANTS --
-  constant N_MEMS    : integer := 10;
-  constant MEM_WIDTH : integer := 40;
-  constant MEM_ADDRS : integer := 256;
+  --constant N_MEMS    : integer := 10;
+  --constant MEM_WIDTH : integer := 40;
+  --constant MEM_ADDRS : integer := 256;
 
   -- SIGNALS -- 
   signal clk : std_logic;
@@ -108,7 +112,7 @@ begin
   reg : process (clk) begin
     if rising_edge(clk) then
       if rst_n = '1' then
-        addr0_count_bitflips <= addr(0);
+        addr0_count_bitflips <= addr(0);  -- Todo: change this to not only 0 to feed it also to the SW
       else
         addr0_count_bitflips <= '0'; -- Not sure if this reset is needed
       end if;
