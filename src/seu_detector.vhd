@@ -19,8 +19,9 @@ entity seu_detector is
     n_reads : in std_logic_vector(15 downto 0);-- Defined from SW register. 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
     t_write : in std_logic_vector(13-1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
     t_write_resolution : in std_logic; -- 0: t_write in 1e-6seconds / 0: t_write in 1s
-    total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0) -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
-  );
+    total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0); -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
+    r_out_en     : out std_logic
+    );
 end seu_detector;
 
 architecture rtl of seu_detector is
@@ -35,7 +36,7 @@ architecture rtl of seu_detector is
   -- Control Unit
   signal mmu_rst_n : std_logic;
   signal w_mem_en  : std_logic;
-  signal r_out_en     : std_logic;
+  --signal r_out_en     : std_logic;
   -- Memory
   signal mem_clk    : std_logic;
   signal data       : std_logic_vector(MEM_WIDTH - 1 downto 0);

@@ -38,16 +38,20 @@ architecture rtl of top is
   -- MM READ
   signal total_bitflips_out : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0);
 
+  -- INTERRUPT
+  signal r_out_en : std_logic;
+
 begin
 
   -- MM Interrupt
-  INS_IRQ0 <= or_reduce(total_bitflips_out);
+  --INS_IRQ0 <= or_reduce(total_bitflips_out);
+  --INS_IRQ0 <= r_out_en; -- Produce IRQ every read_out, to know that the system is working
 
   MM_WRITE_READ : process (CLK_SRC, RESET_N)
   begin
     if RESET_N = '1' then -- ASYNC RESET
       if rising_edge(CLK_SRC) then
-        if WRITE_EN = '1' then
+        if WRITE_EN = '1' then --WRITE
           case OFFSET_ADDRESS is
             when "00000000" =>
               en_sw <= DATA_IN(0);
@@ -63,9 +67,13 @@ begin
               t_write            <= t_write;
               t_write_resolution <= t_write_resolution;
           end case;
-        elsif READ_EN then
-          DATA_OUT <= total_bitflips_out;
-
+        elsif READ_EN then -- READ
+          case OFFSET_ADDRESS is
+            when "00000000" =>
+              DATA_OUT <= total_bitflips_out;
+            when others =>
+              DATA_OUT <= DATA_OUT;
+          end case;
         else
           en_sw              <= en_sw;
           n_reads            <= n_reads;
@@ -102,8 +110,24 @@ begin
     n_reads            => n_reads,
     t_write            => t_write,
     t_write_resolution => t_write_resolution,
-    total_bitflips_out => total_bitflips_out --TODO INTERRUP CONTROLLER FOR THIS. See if it's worth testing like this or implement the IRQ first BOTH probably
+    total_bitflips_out => total_bitflips_out, --TODO INTERRUP CONTROLLER FOR THIS. See if it's worth testing like this or implement the IRQ first BOTH probably
+    r_out_en           => r_out_en
     );
 
-
+  -- Delay IRQTrigger/DataAvailable
+  reg : process (CLK_SRC) begin
+    if rising_edge(CLK_SRC) then
+      if RESET_N = '1' then
+        if r_out_en = '1' then
+          INS_IRQ0 <= r_out_en; -- Latch until IRQ is attended
+        elsif READ_EN = '1' and OFFSET_ADDRESS = "00000000" then
+          INS_IRQ0 <= '0'; -- IRQ attended when read the addr 0
+        end if;
+      else
+        INS_IRQ0 <= '0'; -- Not sure if this reset is needed
+      end if;
+    else
+      INS_IRQ0 <= INS_IRQ0;
+    end if;
+  end process;
 end architecture rtl; -- of debayer

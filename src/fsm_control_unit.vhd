@@ -66,7 +66,7 @@ begin
         when STANDBY =>
           mmu_rst_n_tmp    <= '0';
           w_mem_en_tmp     <= '0';
-          r_out_tmp        <= '1';
+          r_out_tmp        <= '0';
           cnt_read_out_en  <= '0';
           cnt_read_out_clc <= '1';
           en               <= '0';
