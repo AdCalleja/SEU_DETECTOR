@@ -11,7 +11,7 @@ entity top is
     CLK_SRC        : in std_logic                    := '0'; --        clock.clk
     RESET_N        : in std_logic                    := '0'; --      reset_n.reset_n
     OFFSET_ADDRESS : in std_logic_vector(7 downto 0) := (others => '0'); -- avalon_slave.address
-    READ_EN        : in std_logic                    := '0'; --             .read
+    READ_EN        : in std_logic; --             .read
     DATA_OUT       : buffer std_logic_vector(31 downto 0); --             .readdata
     WRITE_EN       : in std_logic;
     DATA_IN        : in std_logic_vector(31 downto 0) := (others => '0');--    avalon_st.data
@@ -42,6 +42,7 @@ architecture rtl of top is
   signal r_out_en : std_logic;
   signal r_out_en_tmp : std_logic;
   signal total_bitflips_out_irq : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0);
+  constant ZERO : std_logic_vector(DATA_OUT'range) := (others => '0');
 
 begin
 
@@ -69,10 +70,10 @@ begin
               t_write            <= t_write;
               t_write_resolution <= t_write_resolution;
           end case;
-        elsif READ_EN then -- READ
+        elsif READ_EN = '1' then -- READ
           case OFFSET_ADDRESS is
             when "00000000" =>
-              DATA_OUT <= total_bitflips_out_irq;
+              DATA_OUT <= ZERO(31 downto total_bitflips_out_irq'length) & total_bitflips_out_irq;
             when others =>
               DATA_OUT <= DATA_OUT;
           end case;
@@ -81,7 +82,7 @@ begin
           n_reads            <= n_reads;
           t_write            <= t_write;
           t_write_resolution <= t_write_resolution;
-          DATA_OUT           <= DATA_OUT; -- Todo: Make sure that DATA_OUT HAS TO BE KEEP AT VALUE OR OTHER THING
+          DATA_OUT           <= DATA_OUT; -- Todo: Latching when read disabled (==addr example) Make sure that DATA_OUT HAS TO BE KEEP AT VALUE OR OTHER THING
         end if;
       else
         en_sw              <= en_sw;

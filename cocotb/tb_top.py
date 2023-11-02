@@ -61,6 +61,18 @@ async def tb_top(dut):
 
     # Handle IRQ and Disable it
     await Timer(4200, units="ns") # Markers calculated 4180 (Wait 2 clocks to read it)
+    dut.OFFSET_ADDRESS.value = 0
+    dut.read_en.value = 1
+    await Timer(10, units="ns")
+    bitflips = dut.DATA_OUT.value
+    print(bitflips)
+    await Timer(10, units="ns")
+    dut.read_en.value = 0
+    bitflips = dut.DATA_OUT.value
+    print(bitflips)
+    await Timer(20, units="ns")
+    bitflips = dut.DATA_OUT.value
+    print(bitflips)
 
 
     # Reset back
