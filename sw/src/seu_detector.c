@@ -15,9 +15,9 @@ int main()
 	uint32_t on_off = generic_read(0, addr);
 	printf("CONFIG PRE:\n nreads = %d\n t_write = %d\n t_write_resolution = %d\n on_off = %d\n", n_reads, t_write, t_write_resolution, on_off);
 
-	generic_write(1, 2, addr); // n_reads
-	generic_write(2, 5, addr); // t_write = 1 seconds
-	generic_write(3, 0, addr); // t_write_resolution = 1 to have it in seconds
+	generic_write(1, 1, addr); // n_reads
+	generic_write(2, 1, addr); // t_write = 1 seconds
+	generic_write(3, 1, addr); // t_write_resolution = 1 to have it in seconds
 	generic_write(0, 1, addr); // Start Experiment
 
 
