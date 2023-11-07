@@ -27,11 +27,11 @@
 				reg = <0 0x1c000000 0x4000000>;
 			};
 	
-			seu_detector0: seu_detector@d0000000{
+			seu_detector0:seu_detector@d0000000{
 				compatible = "generic-uio";
 				reg = <0 0x10000000 0x1000>;
-				interrupt-parent = <&intc>;
-				interrupt = <0x0 41 0x4>;
+				//interrupt-parent = <&intc>;
+				interrupts = <0x0 0x41 0x4>;
 				interrupt-names = "bitflips";
 			};
 
@@ -41,7 +41,7 @@
 				reg = <1 0x0 0x00000007>;
 			};
 
-			gpio_0: pio@ff200040{
+			gpio_0:pio@ff200040{
 				compatible = "altr, pio-17.0", "altr, pio-1.0";
 				interrupt-parent = <&intc>;		
 				altr,ngpio = <12>;
