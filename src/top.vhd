@@ -50,7 +50,8 @@ begin
   --INS_IRQ0 <= or_reduce(total_bitflips_out);
   --INS_IRQ0 <= r_out_en; -- Produce IRQ every read_out, to know that the system is working
 
-  MM_WRITE_READ : process (CLK_SRC, RESET_N)
+  -- DATA WRITE
+  MM_WRITE : process (CLK_SRC, RESET_N)
   begin
     if RESET_N = '1' then -- ASYNC RESET
       if rising_edge(CLK_SRC) then
@@ -70,32 +71,53 @@ begin
               t_write            <= t_write;
               t_write_resolution <= t_write_resolution;
           end case;
-        elsif READ_EN = '1' then -- READ
-          case OFFSET_ADDRESS is
-            when "00000000" =>
-              DATA_OUT <= ZERO(31 downto total_bitflips_out_irq'length) & total_bitflips_out_irq;
-            when others =>
-              DATA_OUT <= DATA_OUT;
-          end case;
         else
           en_sw              <= en_sw;
           n_reads            <= n_reads;
           t_write            <= t_write;
           t_write_resolution <= t_write_resolution;
-          DATA_OUT           <= DATA_OUT; -- Todo: Latching when read disabled (==addr example) Make sure that DATA_OUT HAS TO BE KEEP AT VALUE OR OTHER THING
         end if;
       else
         en_sw              <= en_sw;
         n_reads            <= n_reads;
         t_write            <= t_write;
         t_write_resolution <= t_write_resolution;
-        DATA_OUT           <= DATA_OUT;
       end if;
     else
       en_sw              <= '0';
       n_reads            <= (others => '0');
       t_write            <= (others => '0');
       t_write_resolution <= '0';
+    end if;
+  end process;
+
+  -- DATA READ
+  MM_READ : process (CLK_SRC, RESET_N)
+  begin
+    if RESET_N = '1' then -- ASYNC RESET
+      if rising_edge(CLK_SRC) then
+        if READ_EN = '1' then -- READ
+          case OFFSET_ADDRESS is
+            when "00000000" =>
+              DATA_OUT <= (0 downto 0 => en_sw, others => '0') ;
+            when "00000001" =>
+              DATA_OUT <= n_reads;
+            when "00000010" =>
+              DATA_OUT <= t_write;
+            when "00000011" =>
+              DATA_OUT <= (0 downto 0 => t_write_resolution, others => '0');
+            when "00000100" =>
+              DATA_OUT <= ZERO(31 downto total_bitflips_out_irq'length) & total_bitflips_out_irq;
+            when others =>
+              DATA_OUT <= DATA_OUT;
+          end case;
+        else
+          DATA_OUT           <= DATA_OUT; -- Todo: Latching when read disabled (==addr example) Make sure that DATA_OUT HAS TO BE KEEP AT VALUE OR OTHER THING
+        end if;
+      else
+        DATA_OUT           <= DATA_OUT;
+      end if;
+    else
       DATA_OUT           <= (others => '0');
     end if;
   end process;
@@ -113,7 +135,7 @@ begin
     n_reads            => n_reads,
     t_write            => t_write,
     t_write_resolution => t_write_resolution,
-    total_bitflips_out => total_bitflips_out, --TODO INTERRUP CONTROLLER FOR THIS. See if it's worth testing like this or implement the IRQ first BOTH probably
+    total_bitflips_out => total_bitflips_out,
     r_out_en           => r_out_en_tmp
     );
 
@@ -137,7 +159,7 @@ begin
         if r_out_en = '1' then
           INS_IRQ0 <= r_out_en; -- Latch until IRQ is attended
           total_bitflips_out_irq <= total_bitflips_out;
-        elsif READ_EN = '1' and OFFSET_ADDRESS = "00000000" then
+        elsif READ_EN = '1' and OFFSET_ADDRESS = "00000100" then
           INS_IRQ0 <= '0'; -- IRQ attended when read the addr 0
           total_bitflips_out_irq <= (others => '0'); 
         end if;
