@@ -144,7 +144,7 @@ begin
   -- PROBLEM: WITH THE CLOCK_DIV FOR SECONDS CAN'T GO BELOW 1SEC
   -- TODO: MISSING ENABLE, always active SOLVED with RST
   CLK_DIV_SECONDS : entity work.clock_divider generic
-    map (LIMIT => 10) port
+    map (LIMIT => 100000000) port
     map (clk, rst_n , seconds); -- If any of them 0, reset (rst_n and cnt_read_out_en) -- clock always on, because there is no reason to disable it compared to the other resolution
   
   -- Resolution selector s vs 1e-6s check
