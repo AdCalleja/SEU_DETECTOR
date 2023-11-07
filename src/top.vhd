@@ -101,9 +101,9 @@ begin
             when "00000000" =>
               DATA_OUT <= (0 downto 0 => en_sw, others => '0') ;
             when "00000001" =>
-              DATA_OUT <= n_reads;
+              DATA_OUT <= ZERO(31 downto n_reads'length) & n_reads; --x"00000000"&n_reads;
             when "00000010" =>
-              DATA_OUT <= t_write;
+              DATA_OUT <= 	ZERO(31 downto t_write'length) & t_write; --"000000000000000000" & t_write;	--(std_logic_vector(13-1 downto 0 => t_write), others => '0'); 
             when "00000011" =>
               DATA_OUT <= (0 downto 0 => t_write_resolution, others => '0');
             when "00000100" =>
