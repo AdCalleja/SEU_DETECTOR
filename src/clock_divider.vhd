@@ -25,7 +25,7 @@ begin
       tmp   <= '0';
     elsif (clk'event and clk = '1') then
       count <= count + 1;
-      if (count = 25000) then
+      if (count = LIMIT) then
         tmp   <= not tmp;
         count <= 1;
       end if;
