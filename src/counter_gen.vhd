@@ -22,29 +22,27 @@ architecture beh of COUNTER_GEN is
 
 begin
 
-  process (RESET_N, EN, CLK)
+  process (RESET_N, EN, CLC, CLK)
   begin
     if RESET_N = '1' then
-      if CLK = '1' and CLK'event then
-        if CLC = '0' then
-          if EN = '1' then
-            if DIR = '1' then
-              if Counter >= CNT_TO then
-                Counter <= (others => '0');
-              else
-                Counter <= Counter + 1;
-              end if;
+      if CLC = '0' then
+        if CLK = '1' and CLK'event and EN = '1' then
+          if DIR = '1' then
+            if Counter >= CNT_TO then
+              Counter <= (others => '0');
             else
-              if Counter >= CNT_TO then
-                Counter <= (others => '0');
-              else
-                Counter <= Counter - 1;
-              end if;
+              Counter <= Counter + 1;
+            end if;
+          else
+            if Counter >= CNT_TO then
+              Counter <= (others => '0');
+            else
+              Counter <= Counter - 1;
             end if;
           end if;
-        else
-          Counter <= (others => '0');
         end if;
+      else
+        Counter <= (others => '0');
       end if;
     else
       Counter <= (others => '0');

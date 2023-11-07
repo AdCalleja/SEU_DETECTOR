@@ -135,7 +135,7 @@ async def tb_top(dut):
     # t_write
     dut.OFFSET_ADDRESS.value = 2
     dut.write_en.value = 1
-    dut.DATA_IN.value = 100
+    dut.DATA_IN.value = 5
     await Timer(10, units="ns")
     dut.write_en.value = 0
     await Timer(50, units="ns")

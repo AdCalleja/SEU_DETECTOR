@@ -14,24 +14,25 @@ end clock_divider;
 architecture bhv of clock_divider is
 
   signal count : integer   := 1;
-  signal tmp   : std_logic := '0';
+  signal tmp   : std_logic := '1';
 
 begin
 
   process (clk, reset_n)
   begin
     if (reset_n = '0') then
-      count <= 1;
-      tmp   <= '0';
+      count <= 0;
+      tmp   <= '1';
     elsif (clk'event and clk = '1') then
       count <= count + 1;
       if (count = LIMIT) then
         tmp   <= not tmp;
-        count <= 1;
+        count <= 0;
       end if;
     end if;
-    clock_out <= tmp;
   end process;
+  
+  clock_out <= tmp;
 
 end bhv;
 
