@@ -45,7 +45,7 @@ architecture rtl of seu_detector is
   signal mmu_finish : std_logic;
 
   -- Count Errors
-  signal bitflips             : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_MEMS)))) downto 0); -- Number of errros in binary	
+  signal bitflips             : std_logic_vector(integer(ceil(log2(real(N_MEMS * MEM_ADDRS)))) downto 0); -- Number of errros in binary	
   signal addr0_count_bitflips : std_logic; -- Used to cope with the delay introduced by the memory from write to q
 
   -- Add errors
@@ -124,8 +124,10 @@ begin
   --CNT_ONES : entity work.count_ones GENERIC MAP (din_width=>(N_MEMS*q_m10k_1'length)) PORT MAP (din => (q_mlab_1 & q_mlab_2 & q_m10k_1), dout => total_bitflips);
   CNT_BITFLIPS : entity work.count_bitflips_pattern generic
     map (
+    N_MEMS    => N_MEMS,
     MEM_WIDTH => MEM_WIDTH,
-    N_MEMS    => N_MEMS)
+    MEM_ADDRS => MEM_ADDRS
+    )
     port
     map (
     din   => q_mem,
@@ -133,9 +135,9 @@ begin
     dout  => bitflips);
   SUM_BITFLIPS : entity work.sum_bitflips generic
     map(
+    N_MEMS    => N_MEMS,
     MEM_WIDTH => MEM_WIDTH,
-    MEM_ADDRS => MEM_ADDRS,
-    N_MEMS    => N_MEMS
+    MEM_ADDRS => MEM_ADDRS
     ) port
     map (
     clk            => mem_clk,
