@@ -7,15 +7,15 @@ use work.bus_pkg.all;
 entity sum_bitflips is
   generic
   (
-    N_MEMS    : integer := 10;
     MEM_WIDTH : integer := 40;
-    MEM_ADDRS : integer := 256
+    MEM_ADDRS : integer := 256;
+    N_MEMS    : integer := 10
   );
   port
   (
     clk            : in std_logic;
     rst_n          : in std_logic;
-    bitflips       : in std_logic_vector(integer(ceil(log2(real(MEM_ADDRS * N_MEMS)))) downto 0);
+    bitflips       : in std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_MEMS)))) downto 0);
     total_bitflips : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0)
   );
 end sum_bitflips;
