@@ -7,7 +7,7 @@ use work.bus_pkg.all;
 entity seu_detector is
   generic
   (
-    N_MEMS    : integer := 10;
+    N_MEMS    : integer := 300;
     MEM_WIDTH : integer := 40;
     MEM_ADDRS : integer := 256
   );
