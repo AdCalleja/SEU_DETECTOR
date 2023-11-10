@@ -10,11 +10,11 @@ entity top is
   (
     CLK_SRC        : in std_logic                    := '0'; --        clock.clk
     RESET_N        : in std_logic                    := '0'; --      reset_n.reset_n
-    OFFSET_ADDRESS : in std_logic_vector(7 downto 0) := (others => '0'); -- avalon_slave.address
-    READ_EN        : in std_logic; --             .read
-    DATA_OUT       : buffer std_logic_vector(31 downto 0); --             .readdata
-    WRITE_EN       : in std_logic;
-    DATA_IN        : in std_logic_vector(31 downto 0) := (others => '0');--    avalon_st.data
+    address : in std_logic_vector(7 downto 0) := (others => '0'); -- avalon_slave.address
+    read        : in std_logic; --             .read
+    readdata       : buffer std_logic_vector(31 downto 0); --             .readdata
+    write       : in std_logic;
+    writedata        : in std_logic_vector(31 downto 0) := (others => '0');--    avalon_st.data
     INS_IRQ0       : buffer std_logic
     --EMPTY           : in  std_logic                     := '0';             --             .empty
     --END_OF_PACKET   : in  std_logic                     := '0';             --             .endofpacket
@@ -42,7 +42,7 @@ architecture rtl of top is
   signal r_out_en : std_logic;
   signal r_out_en_tmp : std_logic;
   signal total_bitflips_out_irq : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0);
-  constant ZERO : std_logic_vector(DATA_OUT'range) := (others => '0');
+  constant ZERO : std_logic_vector(readdata'range) := (others => '0');
 
 begin
 
@@ -55,16 +55,16 @@ begin
   begin
     if RESET_N = '1' then -- ASYNC RESET
       if rising_edge(CLK_SRC) then
-        if WRITE_EN = '1' then --WRITE
-          case OFFSET_ADDRESS is
+        if write = '1' then --WRITE
+          case address is
             when "00000000" =>
-              en_sw <= DATA_IN(0);
+              en_sw <= writedata(0);
             when "00000001" =>
-              n_reads <= DATA_IN(15 downto 0);
+              n_reads <= writedata(15 downto 0);
             when "00000010" =>
-              t_write <= DATA_IN(13 - 1 downto 0);
+              t_write <= writedata(13 - 1 downto 0);
             when "00000011" =>
-              t_write_resolution <= DATA_IN(0);
+              t_write_resolution <= writedata(0);
             when others =>
               en_sw              <= en_sw;
               n_reads            <= n_reads;
@@ -96,29 +96,29 @@ begin
   begin
     if RESET_N = '1' then -- ASYNC RESET
       if rising_edge(CLK_SRC) then
-        if READ_EN = '1' then -- READ
-          case OFFSET_ADDRESS is
+        if read = '1' then -- READ
+          case address is
             when "00000000" =>
-              DATA_OUT <= (0 downto 0 => en_sw, others => '0') ;
+              readdata <= (0 downto 0 => en_sw, others => '0') ;
             when "00000001" =>
-              DATA_OUT <= ZERO(31 downto n_reads'length) & n_reads; --x"00000000"&n_reads;
+              readdata <= ZERO(31 downto n_reads'length) & n_reads; --x"00000000"&n_reads;
             when "00000010" =>
-              DATA_OUT <= 	ZERO(31 downto t_write'length) & t_write; --"000000000000000000" & t_write;	--(std_logic_vector(13-1 downto 0 => t_write), others => '0'); 
+              readdata <= 	ZERO(31 downto t_write'length) & t_write; --"000000000000000000" & t_write;	--(std_logic_vector(13-1 downto 0 => t_write), others => '0'); 
             when "00000011" =>
-              DATA_OUT <= (0 downto 0 => t_write_resolution, others => '0');
+              readdata <= (0 downto 0 => t_write_resolution, others => '0');
             when "00000100" =>
-              DATA_OUT <= ZERO(31 downto total_bitflips_out_irq'length) & total_bitflips_out_irq;
+              readdata <= ZERO(31 downto total_bitflips_out_irq'length) & total_bitflips_out_irq;
             when others =>
-              DATA_OUT <= DATA_OUT;
+              readdata <= readdata;
           end case;
         else
-          DATA_OUT           <= DATA_OUT; -- Todo: Latching when read disabled (==addr example) Make sure that DATA_OUT HAS TO BE KEEP AT VALUE OR OTHER THING
+          readdata           <= readdata; -- Todo: Latching when read disabled (==addr example) Make sure that readdata HAS TO BE KEEP AT VALUE OR OTHER THING
         end if;
       else
-        DATA_OUT           <= DATA_OUT;
+        readdata           <= readdata;
       end if;
     else
-      DATA_OUT           <= (others => '0');
+      readdata           <= (others => '0');
     end if;
   end process;
 
@@ -159,7 +159,7 @@ begin
         if r_out_en = '1' then
           INS_IRQ0 <= r_out_en; -- Latch until IRQ is attended
           total_bitflips_out_irq <= total_bitflips_out;
-        elsif READ_EN = '1' and OFFSET_ADDRESS = "00000100" then
+        elsif read = '1' and address = "00000100" then
           INS_IRQ0 <= '0'; -- IRQ attended when read the addr 0
           total_bitflips_out_irq <= (others => '0'); 
         end if;
