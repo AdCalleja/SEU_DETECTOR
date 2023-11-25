@@ -25,7 +25,6 @@ async def tb_top(dut):
     #print(dir(dut.address))
 
     AvMaster = AvalonMaster(dut, "", dut.clk_src)
-    AvMaster._signals = ["offset_addr"]
     print(AvMaster._signals)
     print(AvMaster._optional_signals)
      # Init
