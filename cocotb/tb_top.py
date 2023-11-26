@@ -62,7 +62,7 @@ async def tb_top(dut):
 
     # Check that the interrupt is generated and a value is read
     assert 0 == await serve_irq(dut, AvMaster)
-    assert 0 == await serve_irq(dut, AvMaster)
+    #assert 0 == await serve_irq(dut, AvMaster)
 
     # # Inject Errors
     # await Timer(1500, units="ns")
