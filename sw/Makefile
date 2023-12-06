@@ -9,8 +9,8 @@ devicetree:
 
 c_docker_build:
 	docker cp ./src/ mitysom_docker:/home/user/share/seu_detector
-	docker exec -it $(DOCKER_CONTAINER_NAME_OR_ID) /bin/bash -c "source /home/user/poky_sdk/environment-setup-cortexa8hf-neon-poky-linux-gnueabi; $${CC} -o /home/user/share/seu_detector/exp268.bin /home/user/share/seu_detector/src/exp_268.c /home/user/share/seu_detector/src/uio_generic.*
-	docker cp mitysom_docker:/home/user/share/seu_detector/exp268.bin ./output
+	docker exec -it $(DOCKER_CONTAINER_NAME_OR_ID) /bin/bash -c "source /home/user/poky_sdk/environment-setup-cortexa8hf-neon-poky-linux-gnueabi; $${CC} -o /home/user/share/seu_detector/exp268 /home/user/share/seu_detector/src/exp_268.c /home/user/share/seu_detector/src/uio_generic.*
+	docker cp mitysom_docker:/home/user/share/seu_detector/exp268 ./output
 
 headers_build:
 	wsl cp /mnt/c/Users/adrian/Desktop/code/seu_detector_ref_design/dev_5csx_h6_42a/dev_5csx_h6_42a.sopcinfo ~/headers_build
