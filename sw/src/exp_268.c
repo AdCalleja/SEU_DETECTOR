@@ -10,8 +10,8 @@ int main(int argc, char* argv[])
 	// De-Configure printf buffer to log to file without
 	setbuf(stdout, NULL);
 	//Create time logger
-	char buff[20];
-    struct tm *sTm;
+	//char buff[20];
+    //struct tm *sTm;
 
 	// EXP CONFIG
 	uint32_t N_READS = 1;
@@ -57,11 +57,11 @@ int main(int argc, char* argv[])
 
 
 	uint32_t test = generic_read(4, addr);
-	printf("Test0 number of bitfips pre: %d\n", test);
-	time_t now = time (0);
-	sTm = gmtime (&now);
-	strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
-	printf ("%s %s\n", buff, "Initial Time");
+	printf("Test Events at START: %d\n", test);
+	//time_t now = time (0);
+	//sTm = gmtime (&now);
+	//strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
+	//printf ("%s %s\n", buff, "Initial Time");
 
 	while(1){
 		//sleep(100);
@@ -75,10 +75,11 @@ int main(int argc, char* argv[])
 			uint32_t bitflips = generic_read(4, addr);
 			//printf("Interrupt trigger, number of bitfips: %d\n", bitflips);
 
-			time_t now = time (0);
-			sTm = gmtime (&now);
-			strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
+			//time_t now = time (0);
+			//sTm = gmtime (&now);
+			//strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
 			printf ("%s %s %d\n", buff, "Events occurred:", bitflips);
+			printf ("%s %d\n", "Events:", bitflips);
         }
 
 
