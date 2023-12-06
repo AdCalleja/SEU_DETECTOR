@@ -7,7 +7,7 @@ use work.bus_pkg.all;
 entity seu_detector is
   generic
   (
-    N_MEMS    : integer := 300;
+    N_MEMS    : integer := 5;
     MEM_WIDTH : integer := 40;
     MEM_ADDRS : integer := 256;
 	 T_WRITE_WIDTH : integer := 13
@@ -45,12 +45,27 @@ architecture rtl of seu_detector is
   signal q_mem      : bus_array(N_MEMS - 1 downto 0)((MEM_WIDTH - 1) downto 0);
   signal mmu_finish : std_logic;
 
+  signal mem_select : std_logic_vector (integer(ceil(log2(real(N_MEMS)))) - 1 downto 0);
+  signal q_mem_one  : bus_array(0 downto 0)((MEM_WIDTH - 1) downto 0);
+
   -- Count Errors
-  signal bitflips             : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_MEMS)))) downto 0); -- Number of errros in binary	
+  signal bitflips             : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * 1)))) downto 0); -- Number of errros in binary	-- N_MEMS = 1 to make it sequential
   signal addr0_count_bitflips : std_logic; -- Used to cope with the delay introduced by the memory from write to q
 
   -- Add errors
   signal total_bitflips : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0); -- Number of errros in binary	
+
+  -- Generic MUX -- Using a process right now, but in case I want to use it
+  -- function genmux(s: std_ulogic_vector; v : bus_array ) return std_logic_vector is
+  --   variable res : bus_array(v'length-1 downto 0)(v(0)'length-1 downto 0);
+  --   variable i : integer;
+  --   begin
+  --     res := v; 
+  --     i := 0;
+  --     i := to_integer(unsigned(s));
+  --   return(res(i));
+  -- end;
+
 
   component ram_m10k
     port
@@ -87,6 +102,7 @@ begin
 
   MMU : entity work.mmu generic
     map(
+    N_MEMS => N_MEMS,
     MEM_WIDTH => MEM_WIDTH,
     MEM_ADDRS => MEM_ADDRS
     ) port
@@ -96,6 +112,7 @@ begin
     rst_n      => (rst_n and mmu_rst_n), --Also reset with the normal rst
     mem_clk    => mem_clk,
     data       => data,
+    mem_select => mem_select,
     addr       => addr,
     mmu_finish => mmu_finish
     );
@@ -125,14 +142,19 @@ begin
     end if;
   end process;
 
+
+  mux_mem_select : process (all) begin
+    q_mem_one(0) <= q_mem(to_integer(unsigned(mem_select)));
+  end process;
+
   --CNT_ONES : entity work.count_ones GENERIC MAP (din_width=>(N_MEMS*q_m10k_1'length)) PORT MAP (din => (q_mlab_1 & q_mlab_2 & q_m10k_1), dout => total_bitflips);
   CNT_BITFLIPS : entity work.count_bitflips_pattern generic
     map (
     MEM_WIDTH => MEM_WIDTH,
-    N_MEMS    => N_MEMS)
+    N_MEMS    => 1)  -- N_MEMS is muxed and 1 per clock to reduce combinational logic
     port
     map (
-    din   => q_mem,
+    din   => q_mem_one,
     addr0 => addr0_count_bitflips,
     dout  => bitflips);
   SUM_BITFLIPS : entity work.sum_bitflips generic

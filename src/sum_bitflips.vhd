@@ -15,7 +15,7 @@ entity sum_bitflips is
   (
     clk            : in std_logic;
     rst_n          : in std_logic;
-    bitflips       : in std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * N_MEMS)))) downto 0);
+    bitflips       : in std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * 1)))) downto 0); -- Forced N_MEMS to 1 to make it sequential
     total_bitflips : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0)
   );
 end sum_bitflips;
