@@ -4,8 +4,10 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 ------------------------------------------
 entity fsm_control_unit is
-  -- generic
-  -- ();
+  generic
+  (
+	 T_WRITE_WIDTH : integer := 13
+  );
   port
   (
     clk        : in std_logic;
@@ -17,7 +19,7 @@ entity fsm_control_unit is
     w_mem_en   : out std_logic;
     r_out_en   : out std_logic;
     n_reads    : in std_logic_vector(15 downto 0);-- 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
-    t_write    : in std_logic_vector(13 - 1 downto 0);-- 8192e-6s 8192s = 2.27hours max 
+    t_write    : in std_logic_vector(T_WRITE_WIDTH - 1 downto 0);-- 8192e-6s 8192s = 2.27hours max 
     t_write_resolution : in std_logic -- 0: t_write in 1e-6seconds / 0: t_write in 1s --TODO:Using t_write_resolution 0 will prob break CPU. Use it to test IRQ limits but I have to think about a better TimeUnit
     );
 end fsm_control_unit;

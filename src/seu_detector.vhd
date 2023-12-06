@@ -9,7 +9,8 @@ entity seu_detector is
   (
     N_MEMS    : integer := 300;
     MEM_WIDTH : integer := 40;
-    MEM_ADDRS : integer := 256
+    MEM_ADDRS : integer := 256;
+	 T_WRITE_WIDTH : integer := 13
   );
   port
   (
@@ -17,7 +18,7 @@ entity seu_detector is
     rst_n              : in std_logic;
     en_sw              : in std_logic; -- Defined from SW register
     n_reads            : in std_logic_vector(15 downto 0);-- Defined from SW register. 65536 reads of mem per cycle of write max. CAN BE REDUCED TO SIMPLIFY DESIGN
-    t_write            : in std_logic_vector(13 - 1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
+    t_write            : in std_logic_vector(T_WRITE_WIDTH - 1 downto 0); -- Defined from SW register. 8192s = 2.27hours max
     t_write_resolution : in std_logic; -- 0: t_write in 1e-6seconds / 0: t_write in 1s
     total_bitflips_out : out std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0); -- Number of errros in binary std_logic_vector(integer(ceil(log2(real(WIDTH_M10K*N_MEMS)))) downto 0)
     r_out_en           : buffer std_logic
@@ -64,7 +65,10 @@ architecture rtl of seu_detector is
 
 begin
 
-  FSM_CONTROL_UNIT : entity work.fsm_control_unit port map
+  FSM_CONTROL_UNIT : entity work.fsm_control_unit generic
+    map(
+	 T_WRITE_WIDTH => T_WRITE_WIDTH
+    )  port map
     (
     clk                => clk_src,
     rst_n              => rst_n,

@@ -6,6 +6,7 @@ libs/
 *.cf
 *.vcd
 *.ghw
+sw/exp268_1.0_SEUSensor_soft
 
 # Working with Altera Quartus II (Q2) and do proper versioning is not that easy
 # but if you follow some rules it can be accomplished. :)

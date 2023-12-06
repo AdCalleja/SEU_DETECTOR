@@ -2,10 +2,13 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <time.h>
+#include <signal.h>
+
 
 int main(int argc, char* argv[])
 {
-
+	// De-Configure printf buffer to log to file without
+	setbuf(stdout, NULL);
 	//Create time logger
 	char buff[20];
     struct tm *sTm;
@@ -29,7 +32,7 @@ int main(int argc, char* argv[])
 
 	//uint32_t * addr;
 	//addr = generic_init("/dev/uio1");
-	int uiofd = device_init("/dev/uio1");
+	int uiofd = device_init("/dev/uio3");
 	uint32_t * addr = addr_init(uiofd);
 
 	printf("START\n");

@@ -29,11 +29,13 @@ architecture rtl of top is
   constant N_MEMS    : integer := 10;
   constant MEM_WIDTH : integer := 40;
   constant MEM_ADDRS : integer := 256;
+  constant T_WRITE_WIDTH : integer := 16;
+  
 
   -- MM WRITE
   signal en_sw              : std_logic;
   signal n_reads            : std_logic_vector(15 downto 0);
-  signal t_write            : std_logic_vector(13 - 1 downto 0);
+  signal t_write            : std_logic_vector(T_WRITE_WIDTH - 1 downto 0);
   signal t_write_resolution : std_logic;
   -- MM READ
   signal total_bitflips_out : std_logic_vector(integer(ceil(log2(real(MEM_WIDTH * MEM_ADDRS * N_MEMS)))) downto 0);
@@ -62,7 +64,7 @@ begin
             when "00000001" =>
               n_reads <= DATA_IN(15 downto 0);
             when "00000010" =>
-              t_write <= DATA_IN(13 - 1 downto 0);
+              t_write <= DATA_IN(T_WRITE_WIDTH - 1 downto 0);
             when "00000011" =>
               t_write_resolution <= DATA_IN(0);
             when others =>
@@ -126,7 +128,8 @@ begin
     map(
     N_MEMS    => N_MEMS,
     MEM_WIDTH => MEM_WIDTH,
-    MEM_ADDRS => MEM_ADDRS
+    MEM_ADDRS => MEM_ADDRS,
+	 T_WRITE_WIDTH => T_WRITE_WIDTH
     ) port map
     (
     clk_src            => CLK_SRC,
