@@ -64,11 +64,7 @@ begin
             when "00000001" =>
               n_reads <= writedata(15 downto 0);
             when "00000010" =>
-<<<<<<< HEAD
-              t_write <= DATA_IN(T_WRITE_WIDTH - 1 downto 0);
-=======
               t_write <= writedata(13 - 1 downto 0);
->>>>>>> a0fe1b30e431aef076e2482f1a2819fa67aaaa3c
             when "00000011" =>
               t_write_resolution <= writedata(0);
             when others =>
