@@ -29,7 +29,7 @@ architecture rtl of top is
   constant N_MEMS    : integer := 10;
   constant MEM_WIDTH : integer := 40;
   constant MEM_ADDRS : integer := 256;
-  constant T_WRITE_WIDTH : integer := 16;
+  constant T_WRITE_WIDTH : integer := 13;
   
 
   -- MM WRITE

@@ -62,10 +62,10 @@ async def tb_top(dut):
 
     # Check that the interrupt is generated and a value is read
     assert 0 == await serve_irq(dut, AvMaster)
-    #assert 0 == await serve_irq(dut, AvMaster)
+    assert 0 == await serve_irq(dut, AvMaster)
 
     # # Inject Errors
-    # await Timer(1500, units="ns")
+    #await Timer(1500, units="ns")
     # # Addr 148: Applied to all memories=10*39xClks/2 + 10*1*Clks/2
     # dut.seu_detector.data.value = BinaryValue("1110101010101010101010101010101010101010")
 

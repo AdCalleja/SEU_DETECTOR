@@ -7,6 +7,7 @@ from cocotb.binary import BinaryValue
 
 @cocotb.test()
 async def tb_seu_detetor(dut):
+    '''Error Injection'''
     print("Executing seu_detetor")
     cocotb.start_soon(Clock(dut.clk_src, 10, units="ns").start()) # == CLK <= not CLK after 10 ns; -- 50 MHz 
     
@@ -34,10 +35,6 @@ async def tb_seu_detetor(dut):
     await Timer(1500, units="ns")
     await Timer(10000, units="ns")
 
-
-
-
-    assert 1==1
 
 # # Code that WORKS to READ MEM:
     # # Sadly, it also locks the value

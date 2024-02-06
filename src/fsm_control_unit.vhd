@@ -61,9 +61,9 @@ begin
   end process;
 
 
-  FSM_OUTPUT : process (clk)
+  FSM_OUTPUT : process (current_state, en_sw, mmu_finish, cnt_n_reads, cnt_read, mmu_finish)
   begin
-    if rising_edge(clk) then
+    --if rising_edge(clk) then
       case current_state is
         when STANDBY =>
           mmu_rst_n_tmp    <= '0';
@@ -125,7 +125,7 @@ begin
           cnt_read_out_clc <= '1';
           en               <= '0';
       end case;
-    end if;
+    --end if;
   end process;
   -- Counter of the number of reads before a write is needed
   CNT_N_READS_UNIT : entity work.counter_gen generic
