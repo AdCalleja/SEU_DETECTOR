@@ -51,19 +51,50 @@ architecture RTL of fsm_control_unit is
   attribute syn_encoding of state_type : type is "safe";
 begin
 
-  FSM_STATE : process (clk, rst_n)
-  begin
-    if (rst_n = '0') then
-      current_state <= STANDBY;
-    elsif rising_edge(clk) then
-      current_state <= next_state;
+  --- Finite State Machine ---
+  p_my_FSM_state: process (clk)
+    begin
+    -- state transitions are always synchronous to the clock
+      if (clk'event and clk = '1') then
+      -- on synchronous reset in any state we jump to the idle state
+        if (rst_n = '0') then
+          current_state <= STANDBY;
+        else -- there is no reset
+
+        case current_state is
+          when STANDBY =>
+          if en_sw = '1' then
+            current_state <= WRITE;
+          end if;
+        when WRITE =>
+          if mmu_finish = '1' then
+            current_state <= IDLE;
+          end if;
+        when IDLE =>
+          if cnt_read = std_logic_vector(unsigned(t_write)/unsigned(n_reads)) then
+            current_state <= READ_MEM;
+          end if;
+        when READ_MEM =>
+          if mmu_finish = '1' then
+            current_state <= READ_OUT;
+          end if;
+        when READ_OUT =>
+          if cnt_n_reads < n_reads then
+            current_state <= IDLE;
+          else
+            current_state <= WRITE;
+          end if;
+        when others =>
+          current_state <= STANDBY;
+        end case;
+      end if;
     end if;
-  end process;
+  end process p_my_FSM_state;
 
 
-  FSM_OUTPUT : process (current_state, en_sw, mmu_finish, cnt_n_reads, cnt_read, mmu_finish)
-  begin
-    --if rising_edge(clk) then
+
+  p_my_FSM_output: process (current_state)
+    begin
       case current_state is
         when STANDBY =>
           mmu_rst_n_tmp    <= '0';
@@ -72,9 +103,6 @@ begin
           cnt_read_out_en  <= '0';
           cnt_read_out_clc <= '1';
           en               <= '0';
-          if en_sw = '1' then
-            next_state <= WRITE;
-          end if;
         when WRITE =>
           mmu_rst_n_tmp    <= '1';
           w_mem_en_tmp     <= '1';
@@ -82,9 +110,6 @@ begin
           cnt_read_out_en  <= '0';
           cnt_read_out_clc <= '1';
           en               <= '1';
-          if mmu_finish = '1' then
-            next_state <= IDLE;
-          end if;
         when IDLE =>
           mmu_rst_n_tmp    <= '0';
           w_mem_en_tmp     <= '0';
@@ -92,9 +117,6 @@ begin
           cnt_read_out_en  <= '1';
           cnt_read_out_clc <= '0';
           en               <= '1';
-          if cnt_read = std_logic_vector(unsigned(t_write)/unsigned(n_reads)) then
-            next_state <= READ_MEM;
-          end if;
         when READ_MEM =>
           mmu_rst_n_tmp    <= '1';
           w_mem_en_tmp     <= '0';
@@ -102,9 +124,6 @@ begin
           cnt_read_out_en  <= '0';
           cnt_read_out_clc <= '1';
           en               <= '1';
-          if mmu_finish = '1' then
-            next_state <= READ_OUT;
-          end if;
         when READ_OUT =>
           mmu_rst_n_tmp    <= '0';
           w_mem_en_tmp     <= '0';
@@ -112,11 +131,6 @@ begin
           cnt_read_out_en  <= '1';
           cnt_read_out_clc <= '1';
           en               <= '1';
-          if cnt_n_reads < n_reads then
-            next_state <= IDLE;
-          else
-            next_state <= WRITE;
-          end if;
         when others =>
           mmu_rst_n_tmp    <= '0';
           w_mem_en_tmp     <= '0';
@@ -124,9 +138,11 @@ begin
           cnt_read_out_en  <= '0';
           cnt_read_out_clc <= '1';
           en               <= '0';
-      end case;
-    --end if;
-  end process;
+    end case;
+  end process p_my_FSM_output;
+
+
+  --- TIME UNITS ---
   -- Counter of the number of reads before a write is needed
   CNT_N_READS_UNIT : entity work.counter_gen generic
     map(
